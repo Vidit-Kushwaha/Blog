@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hooks-global-state": "^2.1.0",
+    "react-icons": "^4.12.0",
+    "sass": "^1.69.7"
   },
   "devDependencies": {
     "@headlessui/react": "^1.7.17",

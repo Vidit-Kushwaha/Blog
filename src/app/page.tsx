@@ -1,9 +1,13 @@
-import Image from 'next/image'
+import Books from '@/sections/Books'
+import LatestArticleSection from '@/sections/LatestArticleSection'
+import Projects from '@/sections/Projects'
 
 export default function Home() {
   return (
     <div>
-      <h1>Next.js + TypeScript + Tailwind CSS + ESLint + Prettier</h1>
+      <LatestArticleSection />
+      <Projects/>
+      <Books/>
     </div>
   )
 }
