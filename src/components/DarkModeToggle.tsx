@@ -33,12 +33,12 @@ const DarkModeToggle: React.FC<DarkModeToggleProps> = ({ className = '' }) => {
         <span
           aria-hidden="true"
           className={`${isDarkMode ? 'translate-x-5' : 'translate-x-0'}
-            pointer-events-none transform flex item-center transition duration-200 ease-in-out`}
+            item-center pointer-events-none flex transform transition duration-200 ease-in-out`}
         >
           {isDarkMode ? (
             <IoMdSunny className="h-[22px] w-[22px]" />
           ) : (
-            <IoIosMoon className="fill-white h-[22px] w-[22px]" />
+            <IoIosMoon className="h-[22px] w-[22px] fill-white" />
           )}
         </span>
       </Switch>

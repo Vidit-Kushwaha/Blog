@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
-import {  Poppins } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import './globals.css'
 import '@/styles/index.scss'
 import ClientCommon from './ClientCommon'
-import Footer from '@/sections/Footer'
 import Header from '@/sections/Header'
+import Footer from '@/components/Footer'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={poppins.className}>
         <ClientCommon />
-        <Header  className='shadow-sm dark:border-b dark:border-neutral-700'/>
+        <Header className="shadow-sm dark:border-b dark:border-neutral-700" />
         {children}
         <Footer />
       </body>

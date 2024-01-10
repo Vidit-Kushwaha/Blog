@@ -1,11 +1,10 @@
-'use client';
+'use client'
 
 import { useThemeMode } from '@/utils/useThemeMode'
 import React from 'react'
 
 const ClientCommon = () => {
-
-    useThemeMode();
+  useThemeMode()
 
   return <></>
 }

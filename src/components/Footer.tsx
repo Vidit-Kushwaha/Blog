@@ -6,19 +6,19 @@ import React from 'react'
 const Footer = () => {
   return (
     <div>
-      <footer className="text-gray-600 body-font">
-        <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
-          <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+      <footer className="body-font text-gray-600">
+        <div className="container mx-auto flex flex-col items-center px-5 py-8 sm:flex-row">
+          <a className="title-font flex items-center justify-center font-medium text-gray-900 md:justify-start">
             <span className="ml-3 text-xl">Blogs</span>
           </a>
-          <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
+          <p className="mt-4 text-sm text-gray-500 sm:ml-4 sm:mt-0 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:pl-4">
             © 2024 Vidit Kushwaha —
             <Link
               href={
                 socialMediaLinks.find((link) => link.name === 'Twitter')?.url ||
                 ''
               }
-              className="text-gray-600 ml-1"
+              className="ml-1 text-gray-600"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -26,7 +26,7 @@ const Footer = () => {
                 ?.handle || ''}
             </Link>
           </p>
-          <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+          <span className="mt-4 inline-flex justify-center sm:ml-auto sm:mt-0 sm:justify-start">
             {socialMediaLinks.map((link, index) => {
               return (
                 <Link
