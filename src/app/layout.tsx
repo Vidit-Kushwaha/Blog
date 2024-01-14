@@ -25,10 +25,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <ClientCommon />
-        <Header className="shadow-sm dark:border-b dark:border-neutral-700" />
-        {children}
-        <Footer />
+          <ClientCommon />
+          <Header className="shadow-sm dark:border-b dark:border-neutral-700" />
+          {children}
+          <Footer />
       </body>
     </html>
   )

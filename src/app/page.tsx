@@ -1,5 +1,5 @@
 import Books from '@/sections/Books'
-import LatestArticleSection from '@/components/LatestArticleSection'
+import LatestArticleSection from '@/sections/LatestArticleSection'
 import Projects from '@/sections/Projects'
 
 export default function Home() {

@@ -1,3 +1,4 @@
+import FearturedArticleCard from '@/components/FearturedArticleCard'
 import Search from '@/components/Search'
 import React from 'react'
 
@@ -7,7 +8,12 @@ const LatestArticleSection = () => {
       <div className="flex justify-center px-2 py-4">
         <Search />
       </div>
-      LatestArticleSection
+      
+      <div>
+        <div className='w-2/5 flex justify-center'>
+          <FearturedArticleCard/>
+        </div>
+      </div>
     </div>
   )
 }
