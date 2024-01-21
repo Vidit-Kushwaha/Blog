@@ -29,7 +29,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
         className="container text-neutral-600 "
       />
       <Tag keywords={data.keywords} />
-      <RelevantPost parameters={data.keywords.join('')}/>
+      <RelevantPost parameters={data.keywords.join('')} />
     </div>
   )
 }

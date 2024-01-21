@@ -21,12 +21,12 @@ const RelevantPostCard: React.FC<RelevantPostCardProps> = ({
   date,
   readTime,
 }) => {
-    console.log('featureThumbnail', featureThumbnail)
-    
+  console.log('featureThumbnail', featureThumbnail)
+
   return (
     <div
       key={id}
-      className="aspect-w-3 aspect-h-4 group relative overflow-hidden rounded-3xl shadow-lg"
+      className="group aspect-h-4 aspect-w-3 relative overflow-hidden rounded-3xl shadow-lg"
     >
       <Link href={href}>
         <Image

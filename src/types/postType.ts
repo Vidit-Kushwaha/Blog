@@ -1,4 +1,7 @@
+import { ISODateString } from 'next-auth'
+
 export interface Post {
+  _id: string
   headline: string
   description?: string
   author: string
@@ -10,6 +13,6 @@ export interface Post {
   likes: number
   views: number
   thumbnail?: string
-  featureThumbnail?: string
-  createdAt: Date
+  featureThumbnail: string
+  createdAt: ISODateString
 }

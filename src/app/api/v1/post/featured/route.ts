@@ -23,7 +23,6 @@ export async function POST(req: Request) {
     },
   ])
 
-
   const fuse = new Fuse(posts, FeaturedSearchConfig)
   const results = fuse.search(search)
 

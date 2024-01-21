@@ -38,8 +38,7 @@ const Badge: FC<BadgeProps> = ({
   }
 
   const commonClass =
-    `inline-flex  rounded-full font-medium ${getColor()} ` +
-    className
+    `inline-flex  rounded-full font-medium ${getColor()} ` + className
   return !!href ? (
     <Link
       href={href || ''}

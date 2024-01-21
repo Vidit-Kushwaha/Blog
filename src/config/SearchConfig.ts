@@ -9,7 +9,6 @@ export const SearchConfig = {
   threshold: 0.4,
 }
 
-
 export const FeaturedSearchConfig = {
   includeScore: true,
   keys: [
@@ -19,5 +18,5 @@ export const FeaturedSearchConfig = {
   ],
   useExtendedSearch: true,
   threshold: 0.4,
-  limit : 3
+  limit: 3,
 }
