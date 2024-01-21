@@ -11,6 +11,15 @@ const nextConfig = {
         };
         return config;
       },
+      images: {
+        domains: ["unsplash.com", "imagedelivery.net"],
+        remotePatterns: [
+          {
+            protocol: "https",
+            hostname: "**",
+          },
+        ],
+      },
 }
 
 module.exports = nextConfig

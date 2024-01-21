@@ -8,10 +8,10 @@ const LatestArticleSection = () => {
       <div className="flex justify-center px-2 py-4">
         <Search />
       </div>
-      
+
       <div>
-        <div className='w-2/5 flex justify-center'>
-          <FearturedArticleCard/>
+        <div className="flex w-2/5 justify-center">
+          <FearturedArticleCard />
         </div>
       </div>
     </div>

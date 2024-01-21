@@ -1,3 +1,4 @@
+import TwitterCard from '@/components/TwitterCard'
 import Books from '@/sections/Books'
 import LatestArticleSection from '@/sections/LatestArticleSection'
 import Projects from '@/sections/Projects'

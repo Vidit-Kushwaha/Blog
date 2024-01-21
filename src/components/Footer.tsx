@@ -5,7 +5,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div>
+    <div className="relative bottom-0 w-full">
       <footer className="body-font text-gray-600">
         <div className="container mx-auto flex flex-col items-center px-5 py-8 sm:flex-row">
           <a className="title-font flex items-center justify-center font-medium text-gray-900 md:justify-start">
@@ -35,9 +35,7 @@ const Footer = () => {
                   className={`text-gray-500 ${index !== 0 && 'ml-3'}`}
                   rel="noopener noreferrer"
                   target="_blank"
-                >
-                  <link.icon className="h-5 w-5" />
-                </Link>
+                ></Link>
               )
             })}
           </span>
