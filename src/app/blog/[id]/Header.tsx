@@ -38,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({
       <div className="border-b-[1px] border-t-[1px] border-neutral-300 py-3 dark:border-neutral-800">
         {/* author image */}
         <div className="flex items-baseline justify-between sm:flex-row">
-          <div className="nc-PostMeta2 flex flex-shrink-0 flex-wrap items-center text-left text-sm leading-none text-neutral-700 dark:text-neutral-200">
+          <div className="flex flex-shrink-0 flex-wrap items-center text-left text-sm leading-none text-neutral-700 dark:text-neutral-200">
             <div className="ml-3">
               <div className="flex items-center">
                 <a className="block font-semibold" href="/">

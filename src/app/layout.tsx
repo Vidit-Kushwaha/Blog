@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={poppins.className}>
         <ClientCommon />
-        <Header className="shadow-sm dark:border-b dark:border-neutral-700" />
+        <Header className="container shadow-sm dark:border-b dark:border-neutral-700" />
         {children}
         <Footer />
       </body>

@@ -1,6 +1,5 @@
-// import NavBar from '@/components/NavBar'
 import React, { FC } from 'react'
-import NavBar from '../components/NavBar'
+import Navbar from '@/components/NavBar'
 
 interface Props {
   className?: string
@@ -8,8 +7,8 @@ interface Props {
 
 const Header: FC<Props> = ({ className = '' }) => {
   return (
-    <div className={`sticky left-0 right-0 top-0 z-40 w-full ${className}`}>
-      <NavBar />
+    <div className={`relative  w-full bg-white ${className}`}>
+      <Navbar />
     </div>
   )
 }

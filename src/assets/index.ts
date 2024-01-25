@@ -5,4 +5,7 @@
 // // import logo from './logo.svg';
 // import logoDark from './logo-dark.svg';
 
-// export { github, linkedin, twitter, instagram }
+import open from './open.svg'
+import close from './close.svg'
+
+export { open, close }
