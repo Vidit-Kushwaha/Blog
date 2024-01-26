@@ -1,41 +1,35 @@
 import Image from 'next/image'
 import React from 'react'
 import ArticleSmall from './ArticleSmall'
+import { env } from 'process'
 
-const post = [
-  {
-    index: 1,
-    _id: '9e3e3994-a3ed-47ca-a014-d4483884cfe2',
-    featureThumbnail:
-      'https://images.unsplash.com/photo-1597551681492-10c86e481548?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    headline:
-      'Lenovo’s smarter devices stoke professional passions fsddfsdfsfsdfsdfsdf',
-    description:
-      'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.',
-    createdAt: new Date('2021-03-01T00:00:00.000Z').toISOString(),
-    href: '/blog/single',
-    readingTime: 2,
-    genre: 'standard',
-  },
-  {
-    index: 1,
-    id: '9e3e3994-a3ed-47ca-a014-d4483884cfe2',
-    featureThumbnail:
-      'https://images.unsplash.com/photo-1597551681492-10c86e481548?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    headline: 'Lenovo’s smarter devices stoke professional passions ',
-    description:
-      'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.',
-    createdAt: new Date('2021-03-01T00:00:00.000Z').toISOString(),
-    href: '/blog/single',
-    readingTime: 2,
-    genre: 'standard',
-  },
-]
+interface Post {
+  item: {
+    _id: string
+    headline: string
+    description: string
+    genre: string
+    keywords: string[]
+    featureThumbnail: string
+    createdAt: string
+  }
+}
+async function getData() {
+  const res = await fetch(`${env.URL}/api/v1/post/featured/`, {
+    method: 'POST',
+    body: JSON.stringify({ search: 'hello' }),
+    next: { revalidate: 3600 },
+  })
+  if (!res.ok) {
+    throw new Error('Failed to fetch data')
+  }
+  return res.json()
+}
 
-const src =
-  'https://images.unsplash.com/photo-1607705703571-c5a8695f18f6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-
-const FearturedArticleCard = () => {
+const FearturedArticleCard = async () => {
+  const src =
+    'https://images.unsplash.com/photo-1607705703571-c5a8695f18f6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  const { data } = await getData()
   return (
     <>
       <main className=" mt-12 flex flex-col md:flex-row">
@@ -47,8 +41,8 @@ const FearturedArticleCard = () => {
                   Featured Article
                 </span>
                 <span className="w-full text-neutral-300">
-                  Indulge in the hottest events happening around the globe and
-                  mellow out.
+                  Dive into the latest in global tech happenings, where
+                  cutting-edge events unfold around the world.
                 </span>
               </div>
             </div>
@@ -68,10 +62,10 @@ const FearturedArticleCard = () => {
             Latest Articles
           </span>
           <div className="space-y-2 overflow-y-auto px-2">
-            {post.slice(0, 2).map((posts, index) => (
+            {data.slice(0, 2).map((post: Post, index: number) => (
               <div key={index} className="flex">
                 <div className="font-nunito-sans mx-auto block w-full truncate border-none bg-transparent p-0 font-normal text-gray-400">
-                  <ArticleSmall post={posts} />
+                  <ArticleSmall post={post.item} />
                 </div>
               </div>
             ))}

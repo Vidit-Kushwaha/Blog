@@ -1,14 +1,13 @@
 import { socialMediaLinks } from '@/config/SocialMediaLinks'
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
 const Footer = () => {
   return (
-    <div className="relative bottom-0 w-full">
+    <div className="w-full bg-white dark:bg-dark-200 border-neutral-400 text-gray-900 dark:text-neutral-300 mt-5 border-t-[1px]">
       <footer className="body-font text-gray-600">
         <div className="container mx-auto flex flex-col items-center px-5 py-8 sm:flex-row">
-          <a className="title-font flex items-center justify-center font-medium text-gray-900 md:justify-start">
+          <a className="title-font flex items-center justify-center font-medium  md:justify-start">
             <span className="ml-3 text-xl">Blogs</span>
           </a>
           <p className="mt-4 text-sm text-gray-500 sm:ml-4 sm:mt-0 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:pl-4">
@@ -35,7 +34,9 @@ const Footer = () => {
                   className={`text-gray-500 ${index !== 0 && 'ml-3'}`}
                   rel="noopener noreferrer"
                   target="_blank"
-                ></Link>
+                >
+                  <link.icon className="w-5 h-5" />
+                </Link>
               )
             })}
           </span>

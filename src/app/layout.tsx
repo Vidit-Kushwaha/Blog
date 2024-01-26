@@ -24,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
+      <body className={`${poppins.className} dark:bg-dark-200`}>
         <ClientCommon />
         <Header className="container shadow-sm dark:border-b dark:border-neutral-700" />
         {children}

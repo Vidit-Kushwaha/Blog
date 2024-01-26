@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { IoIosSearch } from 'react-icons/io'
 import Article from './Article'
 import { Post } from '@/types/postType'
-import ArticleSmall from './ArticleSmall'
+import { env } from 'process'
 
 interface SearchProps {}
 
@@ -23,7 +23,7 @@ const Search: React.FC<SearchProps> = () => {
 
     async function getData(query: string) {
       try {
-        const res = await fetch(`http://localhost:3000/api/v1/search`, {
+        const res = await fetch(`${env.URL}/api/v1/search`, {
           method: 'POST',
           body: JSON.stringify({ query }),
         })

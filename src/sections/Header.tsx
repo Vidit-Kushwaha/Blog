@@ -7,7 +7,7 @@ interface Props {
 
 const Header: FC<Props> = ({ className = '' }) => {
   return (
-    <div className={`relative  w-full bg-white ${className}`}>
+    <div className={`relative w-full bg-white ${className}`}>
       <Navbar />
     </div>
   )

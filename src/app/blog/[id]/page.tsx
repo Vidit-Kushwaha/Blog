@@ -2,11 +2,11 @@ import React from 'react'
 import Header from './Header'
 import ArticleBody from './ArticleBody'
 import Tag from './Tag'
-import RelevantPost from './RelevantPost'
+import { env } from 'process'
 
 async function getData(id: string) {
-  const res = await fetch(`http://localhost:3000/api/v1/post/${id}`, {
-    next: { revalidate: 30 },
+  const res = await fetch(`${env.URL}/api/v1/post/${id}`, {
+    next: { revalidate: 3600 },
     // cache: 'no-cache',
   })
 
@@ -19,7 +19,7 @@ async function getData(id: string) {
 const page = async ({ params: { id } }: { params: { id: string } }) => {
   const { data } = await getData(id)
   return (
-    <div className="container w-full max-w-screen-md space-y-5 pt-8 lg:pt-16">
+    <div className="container w-full max-w-screen-md space-y-5 pt-8 lg:pt-16  mt-24">
       <Header
         badge={{ name: data.genre, color: 'blue', href: `/blog/${data.id}` }}
         {...data}
@@ -29,7 +29,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
         className="container text-neutral-600 "
       />
       <Tag keywords={data.keywords} />
-      <RelevantPost parameters={data.keywords.join('')} />
+      {/* <RelevantPost parameters={data.keywords.join('')} /> */}
     </div>
   )
 }

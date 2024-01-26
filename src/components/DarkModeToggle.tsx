@@ -24,6 +24,8 @@ const DarkModeToggle: React.FC<DarkModeToggleProps> = ({ className = '' }) => {
     <div className={`inline-flex ${className}`}>
       <span className="sr-only">Enable dark mode</span>
       <Switch
+        disabled
+        title='Feature coming soon'
         checked={isDarkMode}
         onChange={_toogleDarkMode}
         className={`${isDarkMode ? 'bg-gray-200' : 'bg-gray-600'}

@@ -14,11 +14,16 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      colors: {
+        'dark-100' : '#1E1E1E',
+        'dark-200': '#121212',
     },
+  },
     // "fontFamily": {
     //   "space-mono": "'Space Mono'"
     //   }
   },
   plugins: [require('@tailwindcss/aspect-ratio')],
 }
+
 export default config
