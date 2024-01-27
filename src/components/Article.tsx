@@ -1,26 +1,23 @@
 import React, { FC } from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 import Badge from './Badge'
+import { Post } from '@/types/postType'
 
 export interface ArticleProps {
   className?: string
-  post: {
-    _id: string
-    headline: string
-    featureThumbnail: string
-    createdAt: string
-    // readingTime?: number
-    description?: string
-    genre?: string
-  }
+  post: Post
 }
 
 const Article: FC<ArticleProps> = ({ className = 'h-full', post }) => {
-  const { _id, headline, featureThumbnail, description, createdAt, genre } =
-    post
-  const href = `/blog/${_id}`
-  const readingTime = 5
+  const {
+    headline,
+    featureThumbnail,
+    description,
+    createdAt,
+    genre,
+    readingTime,
+  } = post
+
   return (
     <div
       className={`group relative flex flex-col rounded-lg border-[1px] border-gray-200 p-2 sm:flex-row sm:items-center ${className}`}
@@ -28,8 +25,7 @@ const Article: FC<ArticleProps> = ({ className = 'h-full', post }) => {
       <div
         className={`mb-5 block flex-shrink-0 overflow-hidden rounded-lg sm:mb-0  sm:w-40`}
       >
-        <Link
-          href={href}
+        <div
           className={`aspect-h-9 aspect-w-16 block h-0 w-full sm:aspect-h-16 `}
         >
           <Image
@@ -38,18 +34,17 @@ const Article: FC<ArticleProps> = ({ className = 'h-full', post }) => {
             alt={headline}
             sizes="(max-width: 768px) 100vw, 300px"
           />
-        </Link>
+        </div>
       </div>
       <div className="flex flex-grow flex-col sm:ml-6">
         <div className="mb-4 space-y-2">
           {genre && <Badge name={genre} />}
           <div>
             <h2
-              className={`block text-xl font-semibold text-neutral-900 dark:text-neutral-100`}
+              className={`line-clamp-2 block text-xl font-semibold text-neutral-900 dark:text-neutral-100`}
+              title={headline}
             >
-              <Link href={href} className="line-clamp-2" title={headline}>
-                {headline}
-              </Link>
+              {headline}
             </h2>
             <div className="hidden sm:mt-2 sm:block">
               <span className="md:text-md block max-w-prose truncate pb-1 text-base text-neutral-500 dark:text-neutral-400">

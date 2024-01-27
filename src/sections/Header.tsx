@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import Navbar from '@/components/NavBar'
+import Navbar from '@/sections/NavBar'
 
 interface Props {
   className?: string

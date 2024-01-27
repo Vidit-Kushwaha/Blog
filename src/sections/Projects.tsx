@@ -1,4 +1,4 @@
-import GitHubCard from '@/components/GitHubCard'
+import GitHubCard from '@/components/GitHub'
 import TwitterCard from '@/components/TwitterCard'
 import React from 'react'
 

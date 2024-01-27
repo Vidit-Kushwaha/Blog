@@ -4,7 +4,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { IoIosSearch } from 'react-icons/io'
 import Article from './Article'
 import { Post } from '@/types/postType'
-import { env } from 'process'
+import { URL } from '@/config'
+import Link from 'next/link'
 
 interface SearchProps {}
 
@@ -23,7 +24,7 @@ const Search: React.FC<SearchProps> = () => {
 
     async function getData(query: string) {
       try {
-        const res = await fetch(`${env.URL}/api/v1/search`, {
+        const res = await fetch(`${URL}/api/v1/search`, {
           method: 'POST',
           body: JSON.stringify({ query }),
         })
@@ -122,7 +123,9 @@ const Search: React.FC<SearchProps> = () => {
                 return (
                   <div key={index} className="flex px-3 py-2">
                     <div className="font-nunito-sans mx-auto block w-full max-w-[58.44rem] truncate border-none bg-transparent bg-white p-0 font-normal text-gray-400">
-                      <Article post={post} className="" />
+                      <Link href={`/blog/${post._id}`}>
+                        <Article post={post} className="" />
+                      </Link>
                     </div>
                   </div>
                 )

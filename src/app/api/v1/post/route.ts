@@ -2,6 +2,7 @@ import connectDB from '@/libs/mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 import Post from '@/models/Post'
 import { Post as PostType } from '@/types/postType'
+import { estimateReadingTime } from '@/utils/estimateReadingTime'
 
 export async function GET(req: NextRequest) {
   await connectDB()
@@ -27,7 +28,10 @@ export async function POST(req: Request) {
 
   const postBody = await req.json()
 
-  const post = await Post.create(postBody)
+  const post = await Post.create({
+    ...postBody,
+    readingTime: estimateReadingTime(postBody.articleBody),
+  })
 
   if (!post)
     return NextResponse.json({

@@ -1,60 +1,51 @@
-'use client'
+import React from 'react'
+import { IoStar } from 'react-icons/io5'
+import { PiGitFork } from 'react-icons/pi'
 
-import React, { useEffect } from 'react'
-import GitHub from './GitHub'
-
-interface GitHub {
-  name: string
-  description: string
-  html_url: string
-  stargazers_count: number
-  language: string
-  fork: boolean
+interface Props {
+  className?: string
+  repo: {
+    name: string
+    description: string
+    html_url: string
+    stargazers_count: number
+    forks_count: number
+    language: string
+  }
 }
-const GitHubCard = () => {
-  const [data, setData] = React.useState<{
-    loading: boolean
-    error: Error | ''
-    data: null | [GitHub]
-  }>({
-    loading: false,
-    error: '',
-    data: null,
-  })
-
-  useEffect(() => {
-    async function getData() {
-      const res = await fetch(
-        `https://api.github.com/users/Vidit-Kushwaha/repos`
-      )
-      if (!res.ok) {
-        throw new Error('Failed to fetch data')
-      }
-
-      const data = await res.json()
-      data.sort((a: any, b: any) => b.stargazers_count - a.stargazers_count)
-      setData({ loading: false, error: '', data })
-    }
-    getData()
-  }, [])
-
+const GitHub: React.FC<Props> = ({ className = '', repo }) => {
+  const { name, description, forks_count, stargazers_count } = repo
   return (
-    <div className="font-nunito-sans relative w-full overflow-hidden bg-white p-4 text-left text-slate-500 sm:h-[33rem]">
-      <div className="font-montserrat text-darkgray items-center font-extrabold uppercase text-neutral-500">
-        Projects Spotlight
+    <div
+      className={`relative flex items-center  rounded-lg border-[1px] p-2 text-neutral-900 hover:border-blue-400 hover:text-blue-700 dark:text-neutral-100 ${className}`}
+    >
+      <div>
+        <h2
+          className="relative line-clamp-1 max-w-[30ch] text-lg font-semibold"
+          title={name}
+        >
+          {name}
+        </h2>
+        <div className="hidden sm:mt-2 sm:block">
+          <div className="pb-1 text-base text-neutral-500 dark:text-neutral-400 md:text-sm">
+            <span className="line-clamp-1 text-neutral-900 dark:text-neutral-100">
+              {description || <div className="text-white">NA</div>}
+            </span>
+          </div>
+        </div>
       </div>
-      <div className="flex h-full items-center justify-center">
-        <div className="flex w-full flex-col space-y-3 ">
-          {data.data &&
-            data.data.length > 0 &&
-            data.data
-              ?.filter((item: any) => !item.fork)
-              .slice(0, 5)
-              .map((item, index) => <GitHub key={index} repo={item} />)}
+      <div className="absolute right-2 hidden space-x-2 bg-white sm:flex">
+        <div className="flex h-full flex-col items-center justify-center rounded-lg border-[1px] px-5 py-2 shadow-md">
+          <PiGitFork className="h-5 w-5 fill-black" />
+          <span className="text-sm text-neutral-400">{forks_count}</span>
+        </div>
+        <div className="flex h-full flex-col items-center justify-center rounded-lg border-[1px] px-5 py-2 shadow-md">
+          <IoStar className="h-5 w-5 fill-yellow-400" />
+          <span className="text-sm text-neutral-400">{stargazers_count}</span>
         </div>
       </div>
     </div>
   )
 }
 
-export default GitHubCard
+export default GitHub

@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 import Badge from './Badge'
 
@@ -12,25 +11,23 @@ export interface Card3SmallProps {
     createdAt: string
     description?: string
     genre?: string
+    readingTime: number
   }
 }
 
 const ArticleSmall: FC<Card3SmallProps> = ({ className = 'h-full', post }) => {
-  const { headline, createdAt, featureThumbnail, genre, description } = post
-  const href = `/blog/${post._id}`
-  const readingTime = 5
+  const { headline, createdAt, featureThumbnail, genre, readingTime } = post
 
   return (
     <div
       className={`relative flex flex-col-reverse rounded-lg border-[1px] p-2 transition-colors duration-150 hover:border-blue-400 sm:flex-row sm:items-center sm:justify-between ${className}`}
     >
-      <Link href={href} className=" absolute inset-0" title={headline}></Link>
       <div className="relative space-y-2 overflow-x-hidden ">
         {genre && <Badge name={genre} />}
         <h2 className="block truncate text-base font-semibold text-neutral-900 hover:border-blue-400 dark:text-neutral-100">
-          <Link href={href} className="" title={headline}>
+          <div className="font-semibold" title={headline}>
             {headline}
-          </Link>
+          </div>
         </h2>
         <div className="fledx-wrap inline-flex items-center text-sm leading-none  text-neutral-800 dark:text-neutral-200">
           <>
@@ -51,8 +48,7 @@ const ArticleSmall: FC<Card3SmallProps> = ({ className = 'h-full', post }) => {
         </div>
       </div>
 
-      <Link
-        href={href}
+      <div
         title={headline}
         className={`group relative mb-5 block flex-shrink-0 overflow-hidden rounded-lg sm:mb-0 sm:ml-4 sm:w-28`}
       >
@@ -65,7 +61,7 @@ const ArticleSmall: FC<Card3SmallProps> = ({ className = 'h-full', post }) => {
             sizes="(max-width: 768px) 100vw, 300px"
           />
         </div>
-      </Link>
+      </div>
     </div>
   )
 }

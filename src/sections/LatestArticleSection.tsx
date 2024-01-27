@@ -8,10 +8,7 @@ const LatestArticleSection = () => {
       <div className="flex justify-center">
         <Search />
       </div>
-
-      <div>
         <FearturedArticleCard />
-      </div>
     </div>
   )
 }

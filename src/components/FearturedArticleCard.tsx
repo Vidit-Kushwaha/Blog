@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import React from 'react'
 import ArticleSmall from './ArticleSmall'
-import { env } from 'process'
+import { URL } from '@/config'
+import Link from 'next/link'
 
 interface Post {
   item: {
@@ -12,10 +13,11 @@ interface Post {
     keywords: string[]
     featureThumbnail: string
     createdAt: string
+    readingTime: number
   }
 }
 async function getData() {
-  const res = await fetch(`${env.URL}/api/v1/post/featured/`, {
+  const res = await fetch(`${URL}/api/v1/post/featured/`, {
     method: 'POST',
     body: JSON.stringify({ search: 'hello' }),
     next: { revalidate: 3600 },
@@ -31,7 +33,6 @@ const FearturedArticleCard = async () => {
     'https://images.unsplash.com/photo-1607705703571-c5a8695f18f6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   const { data } = await getData()
   return (
-    <>
       <main className=" mt-12 flex flex-col md:flex-row">
         <div className="my-auto block flex-grow">
           <div className="relative mb-5 block flex-shrink-0 overflow-hidden rounded-xl shadow-lg sm:mb-0">
@@ -64,15 +65,14 @@ const FearturedArticleCard = async () => {
           <div className="space-y-2 overflow-y-auto px-2">
             {data.slice(0, 2).map((post: Post, index: number) => (
               <div key={index} className="flex">
-                <div className="font-nunito-sans mx-auto block w-full truncate border-none bg-transparent p-0 font-normal text-gray-400">
+                <Link href={`/blog/${post.item._id}`} className="font-nunito-sans mx-auto block w-full truncate border-none bg-transparent p-0 font-normal text-gray-400">
                   <ArticleSmall post={post.item} />
-                </div>
+                </Link>
               </div>
             ))}
           </div>
         </div>
       </main>
-    </>
   )
 }
 

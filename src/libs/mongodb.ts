@@ -1,13 +1,14 @@
 // lib/mongodb.js
+import { MONGODB_URI } from '@/config'
 import mongoose from 'mongoose'
 
-if (!process.env.MONGODB_URI) {
+if (!MONGODB_URI) {
   throw new Error('Please add your Mongo URI to .env.local')
 }
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI || '', {
+    await mongoose.connect(MONGODB_URI || '', {
       //   useNewUrlParser: true,
       //   useUnifiedTopology: true,
     })

@@ -14,7 +14,7 @@ export async function POST(req: Request) {
       $project: {
         headline: 1,
         featureThumbnail: 1,
-        readTime: 1,
+        readingTime: 1,
         createdAt: 1,
         keywords: 1,
         description: 1,

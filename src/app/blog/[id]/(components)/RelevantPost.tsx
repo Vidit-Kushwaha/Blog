@@ -1,13 +1,13 @@
 import RelevantPostCard from '@/components/RelevantPostCard'
-import { env } from 'process'
+import { URL } from '@/config'
 import React from 'react'
 
 async function getData(search: string) {
-  const res = await fetch(`${env.URL}/api/v1/post/featured/`, {
+  const res = await fetch(`${URL}/api/v1/post/featured/`, {
     method: 'POST',
     body: JSON.stringify({ search }),
     next: { revalidate: 30 },
-  })
+  }).then((res) => res.json())
 
   if (!res.ok) {
     throw new Error('Failed to fetch data')
