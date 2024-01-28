@@ -70,7 +70,7 @@ const Search: React.FC<SearchProps> = () => {
   }, [])
 
   return (
-    <div className="relative mt-24 w-full" ref={ref}>
+    <div className="relative w-full" ref={ref}>
       {/* search */}
       <div className="relative mx-auto flex w-full items-center rounded-xl border bg-white p-4 shadow-md">
         <div className="flex w-full flex-row items-center justify-stretch gap-[1rem] self-stretch">

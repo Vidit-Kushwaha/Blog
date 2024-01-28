@@ -39,8 +39,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.className} dark:bg-dark-200`}>
         <ClientCommon />
-        <Header className="container shadow-sm dark:border-b dark:border-neutral-700" />
-        {children}
+        <Header className="container max-w-screen-md shadow-sm dark:border-b dark:border-neutral-700" />
+        <div className="container mt-24 min-h-screen max-w-5xl pt-8 lg:pt-16">
+          {children}
+        </div>
         <Footer />
       </body>
     </html>

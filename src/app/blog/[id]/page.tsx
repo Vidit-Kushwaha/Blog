@@ -24,7 +24,7 @@ async function getData(id: string) {
 const page: React.FC<Props> = async ({ params: { id } }) => {
   const { data } = await getData(id)
   return (
-    <div className="container mt-24 w-full max-w-screen-md space-y-5 pt-8 lg:pt-16">
+    <div className="container w-full max-w-screen-md space-y-5 ">
       <Header
         badge={{ name: data.genre, color: 'blue', href: `/blog/${data.id}` }}
         {...data}

@@ -50,7 +50,6 @@ const FearturedArticleCard = async () => {
           <div className="aspect-h-1 aspect-w-1 block h-0 w-full">
             <Image
               fill
-              objectFit="cover"
               alt="Featured article image"
               src={src}
               sizes="(max-width: 768px) 100vw, 300px"
