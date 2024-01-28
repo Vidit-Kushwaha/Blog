@@ -1,9 +1,9 @@
-import { getSession } from '@/app/editor/(login)/action'
 import connectDB from '@/libs/mongodb'
 import Post from '@/models/Post'
 import { Post as PostType } from '@/types/postType'
 import { estimateReadingTime } from '@/utils/estimateReadingTime'
 import { NextRequest, NextResponse } from 'next/server'
+import ProtectedRoute from '../../../../../libs/middleware/protectedRoute'
 
 export async function GET(req: NextRequest, context: any) {
   await connectDB()
@@ -23,16 +23,7 @@ export async function GET(req: NextRequest, context: any) {
 
 export async function PUT(req: Request, context: any) {
   await connectDB()
-
-  const session = await getSession()
-
-  if (!session.isLoggedIn) {
-    return NextResponse.json({
-      success: false,
-      message: 'You are not authorized to access this route!',
-      data: {},
-    })
-  }
+  ProtectedRoute()
 
   const { id } = context.params
   const updates = await req.json()
@@ -55,15 +46,8 @@ export async function PUT(req: Request, context: any) {
 }
 
 export async function DELETE(req: NextRequest, context: any) {
-  const session = await getSession()
-
-  if (!session.isLoggedIn) {
-    return NextResponse.json({
-      success: false,
-      message: 'You are not authorized to access this route!',
-      data: {},
-    })
-  }
+  await connectDB()
+  ProtectedRoute()
 
   const { id } = context.params
   const post = await Post.findByIdAndDelete(id)

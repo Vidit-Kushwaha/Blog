@@ -26,11 +26,8 @@ const ArticleBody: React.FC<ArticleBodyProps> = ({
             return match ? (
               <SyntaxHighlighter
                 PreTag="div"
-                language={match[1] as unknown as string} // Provide the correct type for the language prop
-                // ref={node => {
-                //   // Do something with the ref if needed
-                // }}
-                {...(rest as unknown as SyntaxHighlighterProps[])} // Pass the rest props as an array
+                language={match[1] as unknown as string}
+                {...(rest as unknown as SyntaxHighlighterProps[])}
                 // style={dark}
               >
                 {String(children).replace(/\n$/, '')}

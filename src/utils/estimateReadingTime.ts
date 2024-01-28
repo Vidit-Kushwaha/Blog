@@ -3,11 +3,8 @@ export const estimateReadingTime = (text: string) => {
     .trim()
     .split(/\s+/)
     .filter((word) => word.length > 4)
-  const wordsPerMinute = 200
+  const wordsPerMinute = 75
   const estimatedMinutes = Math.ceil(words.length / wordsPerMinute)
 
-  return {
-    minutes: estimatedMinutes,
-    seconds: estimatedMinutes * 60,
-  }
+  return estimatedMinutes
 }

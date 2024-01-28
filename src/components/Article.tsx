@@ -20,7 +20,7 @@ const Article: FC<ArticleProps> = ({ className = 'h-full', post }) => {
 
   return (
     <div
-      className={`group relative flex flex-col rounded-lg border-[1px] border-gray-200 p-2 sm:flex-row sm:items-center ${className}`}
+      className={`group relative flex flex-col rounded-lg border-[1px] border-gray-200 p-2 hover:border-blue-500 sm:flex-row sm:items-center ${className}`}
     >
       <div
         className={`mb-5 block flex-shrink-0 overflow-hidden rounded-lg sm:mb-0  sm:w-40`}
@@ -41,7 +41,7 @@ const Article: FC<ArticleProps> = ({ className = 'h-full', post }) => {
           {genre && <Badge name={genre} />}
           <div>
             <h2
-              className={`line-clamp-2 block text-xl font-semibold text-neutral-900 dark:text-neutral-100`}
+              className={`line-clamp-2 block text-xl font-semibold text-neutral-900 hover:text-blue-700 dark:text-neutral-100`}
               title={headline}
             >
               {headline}

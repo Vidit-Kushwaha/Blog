@@ -14,10 +14,9 @@ async function getData(id: string) {
 
 const page = async ({ params: { id } }: { params: { id: string } }) => {
   const { data } = await getData(id)
-
   return (
-    <div className="container mt-24 w-full max-w-screen-md space-y-5 pt-8  lg:pt-16">
-      <Editor {...data} />
+    <div className="">
+      <Editor Post={data} id={id} />
     </div>
   )
 }

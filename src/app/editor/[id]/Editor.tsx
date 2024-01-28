@@ -1,7 +1,6 @@
 'use client'
 
 import { URL } from '@/config'
-import { Post } from '@/types/postType'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import Markdown from 'react-markdown'
@@ -11,31 +10,60 @@ import {
   Prism as SyntaxHighlighter,
   SyntaxHighlighterProps,
 } from 'react-syntax-highlighter'
+import { useRouter } from 'next/navigation'
 
-const Editor: React.FC<Post> = (Post) => {
-  const [post, setPost] = useState<Post>(Post)
+interface Props {
+  Post: {
+    headline: string
+    description: string
+    author: string
+    uid?: string
+    genre?: string
+    keywords?: string[]
+    articleBody: string
+    sponsor?: string
+    thumbnail?: string
+    featureThumbnail?: string
+  }
+  id?: string
+}
+
+const Editor: React.FC<Props> = ({ id, Post }) => {
+  const [postData, setPostData] = useState(Post)
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const res = await fetch(`${URL}/api/v1/post/${post._id}`, {
-      method: 'PUT',
-      body: JSON.stringify(post),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    if (!res.ok) {
-      throw new Error('Failed to fetch data')
-    }
-    const data = await res.json()
-  }
 
-  if (!post) return <div>loading...</div>
+    const method = id ? 'PUT' : 'POST'
+    const url = `${URL}/api/v1/post${id ? `/${id}` : ''}`
+    try {
+      const res = await fetch(url, {
+        method,
+        body: JSON.stringify(postData),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      if (!res.ok) {
+        throw new Error(`HTTP error ${res.status}`)
+      }
+      const data = await res.json()
+      if (method === 'POST') {
+        router.push(`/editor/${data.data._id}`)
+      } else {
+        setPostData(data)
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col space-y-8">
+          {/* title */}
           <div className="flex flex-col space-y-2">
             <label htmlFor="title" className="text-xl font-semibold">
               Title
@@ -46,10 +74,13 @@ const Editor: React.FC<Post> = (Post) => {
               id="title"
               className="focus:ring-primary-600 rounded-md border border-neutral-200 p-3 focus:border-transparent focus:outline-none focus:ring-2 dark:border-neutral-700"
               placeholder="Enter title here"
-              value={post.headline}
-              onChange={(e) => setPost({ ...post, headline: e.target.value })}
+              value={postData?.headline}
+              onChange={(e) =>
+                setPostData({ ...postData, headline: e.target.value })
+              }
             />
           </div>
+          {/* description */}
           <div className="flex flex-col space-y-2">
             <label htmlFor="description" className="text-xl font-semibold">
               Description
@@ -60,12 +91,13 @@ const Editor: React.FC<Post> = (Post) => {
               className="focus:ring-primary-600 row-auto rounded-md border border-neutral-200 p-3 focus:border-transparent focus:outline-none focus:ring-2 dark:border-neutral-700"
               rows={5}
               placeholder="Enter description here"
-              value={post.description}
+              value={postData?.description}
               onChange={(e) =>
-                setPost({ ...post, description: e.target.value })
+                setPostData({ ...postData, description: e.target.value })
               }
             />
           </div>
+          {/* author  */}
           <div className="flex flex-col space-y-2">
             <label htmlFor="content" className="text-xl font-semibold">
               Author
@@ -76,8 +108,10 @@ const Editor: React.FC<Post> = (Post) => {
               id="author"
               className="focus:ring-primary-600 rounded-md border border-neutral-200 p-3 focus:border-transparent focus:outline-none focus:ring-2 dark:border-neutral-700"
               placeholder="Enter author here"
-              value={post.author}
-              onChange={(e) => setPost({ ...post, author: e.target.value })}
+              value={postData?.author}
+              onChange={(e) =>
+                setPostData({ ...postData, author: e.target.value })
+              }
             />
           </div>
           {/* genre  */}
@@ -91,8 +125,10 @@ const Editor: React.FC<Post> = (Post) => {
               id="genre"
               className="focus:ring-primary-600 rounded-md border border-neutral-200 p-3 focus:border-transparent focus:outline-none focus:ring-2 dark:border-neutral-700"
               placeholder="Enter genre here"
-              value={post.genre}
-              onChange={(e) => setPost({ ...post, genre: e.target.value })}
+              value={postData?.genre}
+              onChange={(e) =>
+                setPostData({ ...postData, genre: e.target.value })
+              }
             />
           </div>
           {/* Tags  */}
@@ -106,9 +142,12 @@ const Editor: React.FC<Post> = (Post) => {
               id="tags"
               className="focus:ring-primary-600 rounded-md border border-neutral-200 p-3 focus:border-transparent focus:outline-none focus:ring-2 dark:border-neutral-700"
               placeholder="Enter tags here"
-              value={post.keywords}
+              value={postData?.keywords}
               onChange={(e) =>
-                setPost({ ...post, keywords: e.target.value.split(',') })
+                setPostData({
+                  ...postData,
+                  keywords: e.target.value.split(','),
+                })
               }
             />
           </div>
@@ -122,10 +161,10 @@ const Editor: React.FC<Post> = (Post) => {
               id="content"
               className="focus:ring-primary-600 rounded-md border border-neutral-200 p-3 focus:border-transparent focus:outline-none focus:ring-2 dark:border-neutral-700"
               placeholder="Enter content here"
-              value={post.articleBody}
+              value={postData?.articleBody}
               onChange={(e) => {
-                setPost({
-                  ...post,
+                setPostData({
+                  ...postData,
                   articleBody: e.target.value,
                 })
               }}
@@ -154,10 +193,9 @@ const Editor: React.FC<Post> = (Post) => {
               }}
               rehypePlugins={[rehypeRaw, remarkGfm]}
             >
-              {post.articleBody}
+              {postData?.articleBody}
             </Markdown>
           </div>
-
           {/* featureThumbnail  */}
           <div className="flex flex-col space-y-2">
             <label htmlFor="content" className="text-xl font-semibold">
@@ -169,20 +207,22 @@ const Editor: React.FC<Post> = (Post) => {
               id="image"
               className="focus:ring-primary-600 rounded-md border border-neutral-200 p-3 focus:border-transparent focus:outline-none focus:ring-2 dark:border-neutral-700"
               placeholder="Enter image url here"
-              value={post.featureThumbnail}
+              value={postData?.featureThumbnail}
               onChange={(e) =>
-                setPost({ ...post, featureThumbnail: e.target.value })
+                setPostData({ ...postData, featureThumbnail: e.target.value })
               }
             />
-            <div className="max-w-36 aspect-h-1 aspect-w-1 block h-0">
-              <Image
-                fill
-                className=""
-                src={post.featureThumbnail}
-                alt=""
-                sizes="(max-width: 768px) 50vw, 300px"
-              />
-            </div>
+            {postData?.featureThumbnail && (
+              <div className="max-w-36 aspect-h-1 aspect-w-1 block h-0">
+                <Image
+                  fill
+                  className=""
+                  src={postData?.featureThumbnail}
+                  alt=""
+                  sizes="(max-width: 768px) 50vw, 300px"
+                />
+              </div>
+            )}
           </div>
           <button
             type="submit"

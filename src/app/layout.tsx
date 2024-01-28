@@ -3,8 +3,8 @@ import { Poppins } from 'next/font/google'
 import './globals.css'
 import '@/styles/index.scss'
 import ClientCommon from './ClientCommon'
-import Header from '@/sections/Header'
-import Footer from '@/sections/Footer'
+import Header from '@/components/sections/Header'
+import Footer from '@/components/sections/Footer'
 import { URL as urlString } from '@/config'
 
 const poppins = Poppins({

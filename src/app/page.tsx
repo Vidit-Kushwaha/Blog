@@ -1,7 +1,8 @@
-import LatestArticleSection from '@/sections/LatestArticleSection'
-import Projects from '@/sections/Projects'
+import LatestArticleSection from '@/components/sections/LatestArticleSection'
+import Projects from '@/components/sections/Projects'
 
-export default function Home() {
+export const runtime = 'edge'
+const page = () => {
   return (
     <div className="container max-w-5xl space-y-6">
       <LatestArticleSection />
@@ -9,3 +10,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default page

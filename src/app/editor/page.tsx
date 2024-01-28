@@ -1,12 +1,7 @@
-import { Metadata } from 'next'
 import { Form } from './(login)/form'
 import { Suspense } from 'react'
 
-export const metadata: Metadata = {
-  title: '🛠 iron-session examples: Server components, and server actions',
-}
-
-export default async function AppRouter() {
+const page = () => {
   return (
     <main className="mt-24 space-y-5">
       <div className="container grid max-w-xl grid-cols-1 gap-4 rounded-md border-[1px] border-slate-500 p-10">
@@ -17,3 +12,5 @@ export default async function AppRouter() {
     </main>
   )
 }
+
+export default page

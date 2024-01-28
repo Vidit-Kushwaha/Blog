@@ -14,7 +14,7 @@ async function getData(id: string) {
   const res = await fetch(`${URL}/api/v1/post/${id}`, {
     cache: 'no-cache',
   })
-  
+
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }

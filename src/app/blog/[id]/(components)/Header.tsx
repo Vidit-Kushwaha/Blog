@@ -1,7 +1,6 @@
 import Badge from '@/components/Badge'
 import { BadgeColorType } from '@/types/BadgeColor'
 import { Route } from 'next'
-import { ISODateString } from 'next-auth'
 import React from 'react'
 import ShareButton from './ShareButton'
 
@@ -9,9 +8,10 @@ interface HeaderProps {
   badge: { name: string; color?: BadgeColorType; href: Route }
   headline: string
   description: string
-  createdAt: ISODateString
+  createdAt: string
   author: string
   sharedUrl: string
+  readingTime: number
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -20,6 +20,7 @@ const Header: React.FC<HeaderProps> = ({
   description,
   createdAt,
   author,
+  readingTime,
   sharedUrl,
 }) => {
   return (
@@ -55,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({
                 </span>
                 <span className="mx-2 font-semibold">·</span>
                 <span className="text-neutral-700 dark:text-neutral-300">
-                  6 min read
+                  {readingTime} min read
                 </span>
               </div>
             </div>

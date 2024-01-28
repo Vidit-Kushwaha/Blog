@@ -12,11 +12,12 @@ interface SearchProps {}
 const Search: React.FC<SearchProps> = () => {
   const [showPopover, setShowPopover] = useState(false)
   const [search, setSearch] = useState('')
-  const [data, setData] = useState<{
+  const [searchState, setSearchState] = useState<{
     loading: boolean
     error: Error | ''
-    data: null | [{ item: Post }]
-  }>({ loading: false, error: '', data: null })
+    post: null | [{ item: Post }]
+  }>({ loading: false, error: '', post: null })
+
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -34,19 +35,19 @@ const Search: React.FC<SearchProps> = () => {
         }
 
         const data = await res.json()
-        setData({ loading: false, error: '', data: data.data })
-      } catch (error) {
-        setData({
+        setSearchState({ loading: false, error: '', post: data.data })
+      } catch (error: any) {
+        setSearchState({
           loading: false,
           error: new Error('Fail to fetch'),
-          data: null,
+          post: null,
         })
       }
     }
 
     delayDebounceFn = setTimeout(() => {
       if (search.length > 3) {
-        setData({ loading: true, error: '', data: null })
+        setSearchState({ loading: true, error: '', post: null })
         getData(search)
       }
     }, 500)
@@ -70,10 +71,11 @@ const Search: React.FC<SearchProps> = () => {
 
   return (
     <div className="relative mt-24 w-full" ref={ref}>
+      {/* search */}
       <div className="relative mx-auto flex w-full items-center rounded-xl border bg-white p-4 shadow-md">
         <div className="flex w-full flex-row items-center justify-stretch gap-[1rem] self-stretch">
           <div className="h-12 w-full rounded-lg border-[1px] border-solid border-gray-100 bg-gray-100">
-            <div className="flex px-3 py-2">
+            <div className="flex p-3">
               <IoIosSearch className="mx-2 h-6 w-6 fill-gray-500" />
               <input
                 placeholder="Type to begin search blogs and books"
@@ -100,52 +102,34 @@ const Search: React.FC<SearchProps> = () => {
           </div>
         </div>
       </div>
+      {/* popover  */}
       {showPopover && (
         <div className="absolute left-0 top-full z-40 mt-3 max-h-96 w-full min-w-[250px] overflow-y-auto rounded-xl bg-white py-3 shadow-xl dark:bg-neutral-800 sm:min-w-[400px] sm:py-5">
-          {data.loading ? (
-            <div className="flex px-3 py-2">
-              <IoIosSearch className="mx-2 h-6 w-6 fill-gray-500" />
-              <div className="font-nunito-sans block w-full max-w-[58.44rem] truncate border-none bg-transparent p-0 font-normal text-gray-400 placeholder-gray-400 focus:placeholder-neutral-400 focus:outline-none focus:ring-0 dark:placeholder-neutral-200 xl:text-base">
-                Loading
-              </div>
-            </div>
-          ) : data.error ? (
-            <div className="flex px-3 py-2">
-              <IoIosSearch className="mx-2 h-6 w-6 fill-gray-500" />
-              <div className="font-nunito-sans block w-full max-w-[58.44rem] truncate border-none bg-transparent p-0 font-normal text-gray-400">
-                Error
-              </div>
-            </div>
-          ) : data.data ? (
-            data.data.length > 0 ? (
-              data.data.map((item, index) => {
-                const post = item.item
-                return (
-                  <div key={index} className="flex px-3 py-2">
-                    <div className="font-nunito-sans mx-auto block w-full max-w-[58.44rem] truncate border-none bg-transparent bg-white p-0 font-normal text-gray-400">
-                      <Link href={`/blog/${post._id}`}>
-                        <Article post={post} className="" />
-                      </Link>
+          <div className="flex px-3 py-2">
+            <div className="font-nunito-sans block w-full max-w-[58.44rem] truncate border-none bg-transparent p-0 font-normal text-gray-400">
+              {searchState.loading && 'Loading'}
+              {searchState.error && 'Error'}
+              {searchState.post
+                ? searchState.post.length > 0
+                  ? searchState.post.map((item, index) => (
+                      <div key={index} className="flex px-3 py-2">
+                        <Link
+                          href={`/blog/${item.item._id}`}
+                          className="block w-full max-w-[58.44rem] truncate bg-white p-0 font-normal text-gray-400 "
+                        >
+                          <Article post={item.item} />
+                        </Link>
+                      </div>
+                    ))
+                  : 'No results found'
+                : !searchState.loading && (
+                    <div className="flex space-x-2">
+                      <IoIosSearch className="mx-2 h-6 w-6 fill-gray-500" />
+                      Start typing ....
                     </div>
-                  </div>
-                )
-              })
-            ) : (
-              <div className="flex px-3 py-2">
-                <IoIosSearch className="mx-2 h-6 w-6 fill-gray-500" />
-                <div className="font-nunito-sans block w-full max-w-[58.44rem] truncate border-none bg-transparent p-0 font-normal text-gray-400 placeholder-gray-400">
-                  No results found
-                </div>
-              </div>
-            )
-          ) : (
-            <div className="flex px-3 py-2">
-              <IoIosSearch className="mx-2 h-6 w-6 fill-gray-500" />
-              <div className="font-nunito-sans block w-full max-w-[58.44rem] truncate border-none bg-transparent p-0 font-normal text-gray-400 placeholder-gray-400 ">
-                Start typing ....
-              </div>
+                  )}
             </div>
-          )}
+          </div>
         </div>
       )}
     </div>

@@ -1,9 +1,7 @@
-import { JWT_SECRET } from '@/config'
 import connectDB from '@/libs/mongodb'
 import User from '@/models/User'
 import { NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
 
 export async function POST(req: Request) {
   await connectDB()
@@ -25,12 +23,9 @@ export async function POST(req: Request) {
       data: {},
     })
 
-  const token = jwt.sign(user.id, JWT_SECRET)
-
   return NextResponse.json({
     success: true,
     message: '',
     data: user,
-    token: token,
   })
 }
