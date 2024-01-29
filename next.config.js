@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     experimental: {
-        esmExternals: "loose", // <-- add this
-        serverComponentsExternalPackages: ["mongoose"] // <-- and this
+        esmExternals: "loose", 
+        serverComponentsExternalPackages: ["mongoose"] 
       },
       webpack: (config) => {
         config.experiments = {
@@ -12,11 +12,11 @@ const nextConfig = {
         return config;
       },
       images: {
-        domains: ["unsplash.com", "imagedelivery.net"],
         remotePatterns: [
           {
-            protocol: "https",
-            hostname: "**",
+            protocol: 'https',
+            pathname: '**',
+            hostname: '**'
           },
         ],
       },

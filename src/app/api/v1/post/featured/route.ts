@@ -1,30 +1,18 @@
-import { FeaturedSearchConfig } from '@/config/SearchConfig'
 import connectDB from '@/libs/mongodb'
 import Post from '@/models/Post'
-import Fuse from 'fuse.js'
 import { NextResponse } from 'next/server'
 
-export async function POST(req: Request) {
+export async function GET() {
   await connectDB()
 
-  const { search } = await req.json()
-
-  const posts = await Post.aggregate([
-    {
-      $project: {
-        headline: 1,
-        featureThumbnail: 1,
-        readingTime: 1,
-        createdAt: 1,
-        keywords: 1,
-        description: 1,
-        genre: 1,
-      },
-    },
-  ])
-
-  const fuse = new Fuse(posts, FeaturedSearchConfig)
-  const results = fuse.search(search)
+  const posts = await Post.find({
+    flag: 'Featured',
+  })
+    .select(
+      'headline featureThumbnail readingTime createdAt keywords description genre flag'
+    )
+    .limit(5)
+    .sort('-createdAt')
 
   if (!posts)
     return NextResponse.json({
@@ -36,6 +24,6 @@ export async function POST(req: Request) {
   return NextResponse.json({
     success: true,
     message: '',
-    data: results,
+    data: posts,
   })
 }

@@ -3,6 +3,7 @@ import { BadgeColorType } from '@/types/BadgeColor'
 import { Route } from 'next'
 import React from 'react'
 import ShareButton from './ShareButton'
+import Image from 'next/image'
 
 interface HeaderProps {
   badge: { name: string; color?: BadgeColorType; href: Route }
@@ -12,6 +13,11 @@ interface HeaderProps {
   author: string
   sharedUrl: string
   readingTime: number
+  featureThumbnail: string
+  user: {
+    name: string
+    avatar: string
+  }
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -22,6 +28,7 @@ const Header: React.FC<HeaderProps> = ({
   author,
   readingTime,
   sharedUrl,
+  user: { name, avatar: url },
 }) => {
   return (
     <header className="container space-y-5 rounded-xl">
@@ -32,7 +39,7 @@ const Header: React.FC<HeaderProps> = ({
       >
         {headline}
       </h1>
-      <span className="md:text-md block pb-1 text-base text-neutral-500 dark:text-neutral-400">
+      <span className="block pb-1 text-base text-neutral-500 dark:text-neutral-400 md:text-sm">
         {description}
       </span>
       {/* author and share section */}
@@ -40,12 +47,18 @@ const Header: React.FC<HeaderProps> = ({
         {/* author image */}
         <div className="flex items-baseline justify-between sm:flex-row">
           <div className="flex flex-shrink-0 flex-wrap items-center text-left text-sm leading-none text-neutral-700 dark:text-neutral-200">
+            <div
+              className={`relative inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full shadow-inner sm:h-11 sm:w-11`}
+            >
+              <Image
+                fill
+                className={`absolute inset-0 h-full w-full rounded-full object-cover`}
+                src={url}
+                alt={name}
+              />
+            </div>
             <div className="ml-3">
-              <div className="flex items-center">
-                <a className="block font-semibold" href="/">
-                  {author}
-                </a>
-              </div>
+              <div className="flex items-center font-bold">{author}</div>
               <div className="mt-[6px] text-xs">
                 <span className="text-neutral-700 dark:text-neutral-300">
                   {new Date(createdAt).toLocaleDateString('en-US', {

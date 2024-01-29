@@ -3,13 +3,13 @@ import React from 'react'
 import Badge from '@/components/Badge'
 
 interface TagProps {
-  keywords: string[]
+  keywords?: string[]
 }
 
 const Tag: React.FC<TagProps> = ({ keywords }) => {
   return (
     <div className={`space-y-2 px-5 pt-10 `}>
-      {keywords.map((item: string, index: number) => (
+      {keywords?.map((item: string, index: number) => (
         <Badge
           key={index}
           name={item}

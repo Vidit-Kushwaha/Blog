@@ -29,7 +29,7 @@ const page: React.FC<Props> = async ({ params: { id } }) => {
         badge={{ name: data.genre, color: 'blue', href: `/blog/${data.id}` }}
         {...data}
       />
-      <ArticleBody articleBody={data.articleBody} className="container" />
+      <ArticleBody {...data} className="container" />
       <Tag keywords={data.keywords} />
     </div>
   )

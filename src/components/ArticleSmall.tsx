@@ -10,20 +10,25 @@ export interface Card3SmallProps {
     featureThumbnail: string
     createdAt: string
     description?: string
-    genre?: string
+    genre: string
     readingTime: number
+    flag?: string
   }
 }
 
 const ArticleSmall: FC<Card3SmallProps> = ({ className = 'h-full', post }) => {
-  const { headline, createdAt, featureThumbnail, genre, readingTime } = post
+  const { headline, createdAt, featureThumbnail, genre, readingTime, flag } =
+    post
 
   return (
     <div
       className={`relative flex flex-col-reverse rounded-lg border-[1px] p-2 transition-colors duration-150 hover:border-blue-400 sm:flex-row sm:items-center sm:justify-between ${className}`}
     >
-      <div className="relative space-y-2 overflow-x-hidden ">
-        {genre && <Badge name={genre} />}
+      <div className="relative space-y-2 overflow-x-hidden">
+        <div className="space-x-2">
+          {flag && <Badge name={flag} color="gray" />}
+          {genre && <Badge name={genre} />}
+        </div>
         <h2 className="block truncate text-base font-semibold text-neutral-900 hover:border-blue-400 dark:text-neutral-100">
           <div className="font-semibold" title={headline}>
             {headline}

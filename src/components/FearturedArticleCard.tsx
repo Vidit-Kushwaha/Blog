@@ -5,21 +5,18 @@ import { URL } from '@/config'
 import Link from 'next/link'
 
 interface Post {
-  item: {
-    _id: string
-    headline: string
-    description: string
-    genre: string
-    keywords: string[]
-    featureThumbnail: string
-    createdAt: string
-    readingTime: number
-  }
+  _id: string
+  headline: string
+  description: string
+  genre: string
+  keywords: string[]
+  featureThumbnail: string
+  createdAt: string
+  readingTime: number
+  flag?: string
 }
 async function getData() {
   const res = await fetch(`${URL}/api/v1/post/featured/`, {
-    method: 'POST',
-    body: JSON.stringify({ search: 'hello' }),
     next: { revalidate: 3600 },
   })
   if (!res.ok) {
@@ -65,10 +62,10 @@ const FearturedArticleCard = async () => {
           {data.slice(0, 2).map((post: Post, index: number) => (
             <div key={index} className="flex">
               <Link
-                href={`/blog/${post.item._id}`}
+                href={`/blog/${post._id}`}
                 className="font-nunito-sans mx-auto block w-full truncate border-none bg-transparent p-0 font-normal text-gray-400"
               >
-                <ArticleSmall post={post.item} />
+                <ArticleSmall post={post} />
               </Link>
             </div>
           ))}

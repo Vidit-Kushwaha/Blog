@@ -6,18 +6,31 @@ import {
   Prism as SyntaxHighlighter,
   SyntaxHighlighterProps,
 } from 'react-syntax-highlighter'
+import Image from 'next/image'
 
 interface ArticleBodyProps {
   className?: string
   articleBody: string
+  featureThumbnail: string
 }
 
 const ArticleBody: React.FC<ArticleBodyProps> = ({
   className,
   articleBody,
+  featureThumbnail,
 }) => {
   return (
     <div className={`font-regular leading-relaxed ${className}`}>
+      <div className="mb-10">
+        <Image
+          className="w-full rounded-lg"
+          width={600}
+          height={300}
+          src={featureThumbnail}
+          alt="featureThumbnail"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
+        />
+      </div>
       <Markdown
         components={{
           code(props) {

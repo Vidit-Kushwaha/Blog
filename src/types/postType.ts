@@ -6,7 +6,8 @@ export interface Post {
   readingTime: number
   user: string
   uid: string
-  genre?: string
+  genre: PostGenreType[]
+  flags?: PostFlagType[]
   keywords?: string[]
   articleBody: string
   sponsor?: string
@@ -16,3 +17,22 @@ export interface Post {
   featureThumbnail: string
   createdAt: string
 }
+
+export type PostGenreType =
+  | 'Book'
+  | 'Podcast'
+  | 'Article'
+  | 'Video'
+  | 'Course'
+  | 'Event'
+  | 'Product'
+  | 'Service'
+  | 'Job'
+  | 'Other'
+
+export type PostFlagType =
+  | 'Featured'
+  | 'Trending'
+  | 'Latest'
+  | 'Popular'
+  | 'Recommended'

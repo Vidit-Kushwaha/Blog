@@ -1,6 +1,19 @@
-import { faker } from '@faker-js/faker'
-
+import { PostFlagType, PostGenreType } from '@/types/postType'
+import { Error } from 'mongoose'
 const mongoose = require('mongoose')
+
+const genreTypes: PostGenreType[] = [
+  'Book',
+  'Podcast',
+  'Article',
+  'Video',
+  'Course',
+  'Event',
+  'Product',
+  'Service',
+  'Job',
+  'Other',
+]
 
 const postSchema = new mongoose.Schema({
   headline: {
@@ -17,7 +30,12 @@ const postSchema = new mongoose.Schema({
   },
   genre: {
     type: String,
-    enum: ['featured', 'trending', 'latest', 'popular', 'recommended'],
+    enum: genreTypes,
+    required: true,
+  },
+  flag: {
+    type: String,
+    enum: ['Featured', 'Trending', 'Latest', 'Popular', 'Recommended'],
   },
   keywords: [String],
   articleBody: {
@@ -26,6 +44,7 @@ const postSchema = new mongoose.Schema({
   },
   readingTime: {
     type: Number,
+    required: true,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -48,6 +67,7 @@ const postSchema = new mongoose.Schema({
   },
   featureThumbnail: {
     type: String,
+    required: true,
   },
   createdAt: {
     type: Date,
@@ -58,33 +78,3 @@ const postSchema = new mongoose.Schema({
 const Post = mongoose.models.Post || mongoose.model('Post', postSchema)
 
 export default Post
-
-export const createRandomPosts = async (numPosts = 10) => {
-  try {
-    const posts = []
-    for (let i = 0; i < numPosts; i++) {
-      posts.push(
-        new Post({
-          headline: faker.lorem.sentence(),
-          description: faker.lorem.paragraph(),
-          author: faker.person.firstName(),
-          uid: i * Math.random(),
-          genre: faker.lorem.word(),
-          keywords: faker.lorem.words(5),
-          articleBody: faker.lorem.paragraphs(3),
-          sponsor: faker.company.name(),
-          likes: faker.number.int(),
-          views: faker.number.int(),
-          thumbnail: faker.image.url(),
-          featureThumbnail: faker.image.url(),
-          createdAt: faker.date.past(),
-        })
-      )
-    }
-
-    await Post.insertMany(posts) // Insert multiple posts at once
-    console.log(`Created ${numPosts} random posts`)
-  } catch (error) {
-    console.error('Error creating posts:', error)
-  }
-}
