@@ -1,6 +1,12 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, {
+  FocusEvent,
+  FocusEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import { IoIosSearch } from 'react-icons/io'
 import Article from './Article'
 import { Post } from '@/types/postType'
@@ -19,6 +25,7 @@ const Search: React.FC<SearchProps> = () => {
   }>({ loading: false, error: '', post: null })
 
   const ref = useRef<HTMLDivElement>(null)
+  const inputRef = useRef(null)
 
   useEffect(() => {
     let delayDebounceFn: NodeJS.Timeout
@@ -62,15 +69,29 @@ const Search: React.FC<SearchProps> = () => {
       }
     }
 
-    document.addEventListener('mousedown', handleOutsideClick)
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.ctrlKey && (event.key === 'X' || event.key === 'x')) {
+        event.preventDefault()
+        setShowPopover(false)
+        if (inputRef?.current) (inputRef.current as HTMLInputElement).blur()
+      } else if (event.ctrlKey && (event.key === 'k' || event.key === 'K')) {
+        event.preventDefault()
+        setShowPopover(true)
+        if (inputRef?.current) (inputRef.current as HTMLInputElement).focus()
+      }
+    }
+
+    window.addEventListener('mousedown', handleOutsideClick)
+    window.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick)
+      window.removeEventListener('mousedown', handleOutsideClick)
+      window.removeEventListener('keydown', handleKeyDown)
     }
   }, [])
 
   return (
-    <div className="relative w-full" ref={ref}>
+    <div id="search-container" className="relative w-full" ref={ref}>
       {/* search */}
       <div className="relative mx-auto flex w-full items-center rounded-xl border bg-white p-4 shadow-md">
         <div className="flex w-full flex-row items-center justify-stretch gap-[1rem] self-stretch">
@@ -78,15 +99,20 @@ const Search: React.FC<SearchProps> = () => {
             <div className="flex p-3">
               <IoIosSearch className="mx-2 h-6 w-6 fill-gray-500" />
               <input
+                ref={inputRef}
+                type="text"
                 placeholder="Type to begin search blogs and books"
                 className="font-nunito-sans block w-full max-w-[58.44rem] truncate border-none bg-transparent p-0 font-normal text-gray-400 placeholder-gray-400 focus:placeholder-neutral-400 focus:outline-none focus:ring-0 dark:placeholder-neutral-200 xl:text-base"
-                onFocus={() => setShowPopover(true)}
+                onFocus={(e: FocusEvent<HTMLInputElement, Element>) => {
+                  e.preventDefault()
+                  setShowPopover(true)
+                }}
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
           </div>
           <div className="relative mx-auto box-border hidden h-12 flex-row items-center justify-start gap-[0.25rem] rounded-lg text-left text-[1.25rem] font-medium md:flex">
-            <div className="box-border flex h-12 min-w-[3rem] flex-row items-center justify-center rounded-lg border-[1px] border-solid border-gray-300 bg-gray-200 px-2 py-[.75rem] ">
+            <div className="box-border flex h-12 min-w-[3rem] flex-row items-center justify-center rounded-lg border-[1px] border-solid border-gray-300 bg-gray-200 px-2 py-[.75rem]">
               <div className="relative inline-block max-h-[1.81rem] capitalize leading-[1.25rem] ">
                 Ctrl
               </div>
@@ -96,7 +122,7 @@ const Search: React.FC<SearchProps> = () => {
             </div>
             <div className="box-border flex h-12 min-w-[3rem] flex-row items-center justify-center rounded-lg border-[1px] border-solid border-gray-300 bg-gray-200 px-2 py-[.50rem]">
               <div className="relative inline-block max-h-[1rem] capitalize leading-[1.25rem]">
-                k
+                {showPopover ? 'X' : 'K'}         
               </div>
             </div>
           </div>
