@@ -15,8 +15,9 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: 'Blogs',
-  description: 'I',
+  description: 'Freshly curate tech blogs',
   metadataBase: new URL(urlString),
+  manifest: '/manifest.json',
   alternates: {
     canonical: '/',
     languages: {
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    images: '/og-image.png',
+    images: '/icon/icon-192x192.png',
   },
 }
 

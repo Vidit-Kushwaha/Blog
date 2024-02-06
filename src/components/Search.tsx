@@ -122,7 +122,7 @@ const Search: React.FC<SearchProps> = () => {
             </div>
             <div className="box-border flex h-12 min-w-[3rem] flex-row items-center justify-center rounded-lg border-[1px] border-solid border-gray-300 bg-gray-200 px-2 py-[.50rem]">
               <div className="relative inline-block max-h-[1rem] capitalize leading-[1.25rem]">
-                {showPopover ? 'X' : 'K'}         
+                {showPopover ? 'X' : 'K'}
               </div>
             </div>
           </div>
