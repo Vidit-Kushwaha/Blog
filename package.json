@@ -1,23 +1,27 @@
 {
   "name": "blogs",
   "version": "0.1.0",
+  "description": "Next.js Blog | Secure & Serverless with MongoDB & iron-session",
+  "license": "ISC",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "cross-env NODE_ENV=development next dev",
+    "build": "cross-env NODE_ENV=production && next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vidit-Kushwaha/Blog.git"
+  },
   "dependencies": {
-    "@tailwindcss/aspect-ratio": "^0.4.2",
     "bcryptjs": "^2.4.3",
-    "faker": "^6.6.6",
     "framer-motion": "^10.18.0",
     "fuse.js": "^7.0.0",
     "iron-session": "^8.0.1",
-    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.4",
+    "next-pwa": "^5.6.0",
     "react": "^18",
     "react-dom": "^18",
     "react-hooks-global-state": "^2.1.0",
@@ -27,11 +31,12 @@
     "rehype-highlight": "^7.0.0",
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.0",
-    "sass": "^1.69.7"
+    "sass": "^1.69.7",
+    "sharp": "^0.33.2"
   },
   "devDependencies": {
-    "@faker-js/faker": "^8.3.1",
     "@headlessui/react": "^1.7.17",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "@types/bcryptjs": "^2.4.6",
     "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^20",
@@ -39,6 +44,7 @@
     "@types/react-dom": "^18",
     "@types/react-syntax-highlighter": "^15.5.11",
     "autoprefixer": "^10.0.1",
+    "cross-env": "^7.0.3",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "husky": "^8.0.3",
