@@ -31,7 +31,7 @@ const Header: React.FC<HeaderProps> = ({
   user: { name, avatar: url },
 }) => {
   return (
-    <header className="container space-y-5 rounded-xl">
+    <header className="space-y-5 rounded-xl">
       <Badge href={badge.href} color={badge.color} name={badge.name} />
       <h1
         className="max-w-4xl text-3xl font-semibold text-neutral-900 dark:text-neutral-100 md:text-4xl md:!leading-[120%] lg:text-4xl"
