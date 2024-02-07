@@ -12,7 +12,7 @@ type Props = {
 
 async function getData(id: string) {
   const res = await fetch(`${URL}/api/v1/post/${id}`, {
-    cache: 'no-cache',
+    next: { revalidate: 3600 },
   })
 
   if (!res.ok) {
@@ -29,7 +29,7 @@ const page: React.FC<Props> = async ({ params: { id } }) => {
         badge={{ name: data.genre, color: 'blue', href: `/blog/${data.id}` }}
         {...data}
       />
-      <ArticleBody {...data} className="container" />
+      <ArticleBody {...data} />
       <Tag keywords={data.keywords} />
     </div>
   )
