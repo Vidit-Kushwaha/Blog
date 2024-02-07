@@ -1,8 +1,11 @@
+'use client'
+
 import Image from 'next/image'
 import React from 'react'
 import ArticleSmall from './ArticleSmall'
-import { URL } from '@/config'
 import Link from 'next/link'
+import useSWR from 'swr'
+import Loader from './Loader'
 
 interface Post {
   _id: string
@@ -15,20 +18,17 @@ interface Post {
   readingTime: number
   flag?: string
 }
-async function getData() {
-  const res = await fetch(`${URL}/api/v1/post/featured/`, {
-    next: { revalidate: 3600 },
-  })
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
-  }
-  return res.json()
-}
 
-const FearturedArticleCard = async () => {
+export const runtime = 'nodejs'
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json())
+
+const FearturedArticleCard = () => {
   const src =
     'https://images.unsplash.com/photo-1607705703571-c5a8695f18f6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-  const { data } = await getData()
+
+  const { data, error, isLoading } = useSWR(`/api/v1/post/featured/`, fetcher)
+
   return (
     <main className=" mt-12 flex flex-col md:flex-row">
       <div className="my-auto block flex-grow">
@@ -59,16 +59,19 @@ const FearturedArticleCard = async () => {
           Latest Articles
         </span>
         <div className="space-y-2 overflow-y-auto px-2">
-          {data.slice(0, 2).map((post: Post, index: number) => (
-            <div key={index} className="flex">
-              <Link
-                href={`/blog/${post._id}`}
-                className="font-nunito-sans mx-auto block w-full truncate border-none bg-transparent p-0 font-normal text-gray-400"
-              >
-                <ArticleSmall post={post} />
-              </Link>
-            </div>
-          ))}
+          {isLoading && <Loader/>}
+          {error && <div>Failed to load</div>}
+          {data &&
+            data.data.slice(0, 2).map((post: Post, index: number) => (
+              <div key={index} className="flex">
+                <Link
+                  href={`/blog/${post._id}`}
+                  className="font-nunito-sans mx-auto block w-full truncate border-none bg-transparent p-0 font-normal text-gray-400"
+                >
+                  <ArticleSmall post={post} />
+                </Link>
+              </div>
+            ))}
         </div>
       </div>
     </main>
