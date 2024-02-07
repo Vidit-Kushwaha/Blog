@@ -12,7 +12,7 @@ type Props = {
 
 async function getData(id: string) {
   const res = await fetch(`${URL}/api/v1/post/${id}`, {
-    cache: 'no-cache',
+    next: { revalidate: 3600 },
   })
 
   if (!res.ok) {
