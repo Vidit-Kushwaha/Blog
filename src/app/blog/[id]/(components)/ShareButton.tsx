@@ -1,4 +1,5 @@
 'use client'
+
 import { Popover, Transition } from '@headlessui/react'
 import React, { Fragment } from 'react'
 import {
@@ -7,6 +8,7 @@ import {
   IoLogoLinkedin,
   IoLogoTwitter,
 } from 'react-icons/io5'
+import { toast } from 'react-toastify'
 
 interface ShareButtonProps {
   className?: string
@@ -82,6 +84,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ className, urlHeader }) => {
                   <div
                     key={item.name}
                     onClick={() => {
+                      toast('Link copied', { toastId: 'unique_id' })
                       navigator.clipboard.writeText(item.href)
                     }}
                     className="-m-3 flex items-center rounded-lg p-2 text-neutral-500 transition duration-150 ease-in-out hover:bg-gray-50 hover:text-neutral-900 focus:outline-none"
