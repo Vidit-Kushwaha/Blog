@@ -10,7 +10,7 @@ export function Input() {
       <div>
         <label
           htmlFor="email"
-          className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+          className="mb-2 block text-sm font-medium text-gray-900"
         >
           Your email
         </label>
@@ -20,7 +20,7 @@ export function Input() {
           id="email"
           disabled={pending}
           autoComplete="off"
-          className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-blue-600 focus:ring-blue-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
+          className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-blue-600 focus:ring-blue-600 sm:text-sm"
           placeholder="example@email.com"
           required
         />
@@ -28,7 +28,7 @@ export function Input() {
       <div>
         <label
           htmlFor="password"
-          className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+          className="mb-2 block text-sm font-medium text-gray-900"
         >
           Password
         </label>
@@ -39,7 +39,7 @@ export function Input() {
           disabled={pending}
           autoComplete="off"
           placeholder="••••••••"
-          className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-blue-600 focus:ring-blue-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
+          className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-blue-600 focus:ring-blue-600 sm:text-sm"
           required
         />
       </div>
