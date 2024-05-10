@@ -50,6 +50,7 @@ const config: Config = {
         h1: {
           fontSize: theme('fontSize.3xl'),
           fontWeight: theme('fontWeight.bold'),
+          fontFamily: theme('fontFamily.sans'),
         },
         h2: {
           fontSize: theme('fontSize.2xl'),

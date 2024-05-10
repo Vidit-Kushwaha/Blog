@@ -2,10 +2,10 @@ import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import './globals.css'
 import '@/styles/index.scss'
-import ClientCommon from './ClientCommon'
 import Header from '@/components/sections/Header'
 import Footer from '@/components/sections/Footer'
 import { URL as urlString } from '@/config'
+import NavBar from '@/components/sections/NavBar'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -38,12 +38,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} dark:bg-dark-200`}>
-        <ClientCommon />
-        <Header className="container max-w-screen-md shadow-sm dark:border-b dark:border-neutral-700" />
-        <div className="container mt-24 min-h-screen max-w-5xl pt-8 lg:pt-16">
-          {children}
-        </div>
+      <body className={`${poppins.className}`}>
+        <NavBar />
+        <Header className="container max-w-screen-lg shadow-sm" />
+        <div className="container min-h-screen max-w-screen-xl">{children}</div>
         <Footer />
       </body>
     </html>

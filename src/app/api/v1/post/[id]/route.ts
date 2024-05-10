@@ -9,7 +9,10 @@ export async function GET(req: NextRequest, context: any) {
   await connectDB()
   const { id } = context.params
 
-  const post: PostType = await Post.findById(id).populate('user', 'avatar')
+  const post: PostType | null = (await Post.findById(id).populate(
+    'user',
+    'avatar'
+  )) as PostType | null
 
   if (!post) {
     return NextResponse.json({

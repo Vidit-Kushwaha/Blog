@@ -1,6 +1,5 @@
 import { PostFlagType, PostGenreType } from '@/types/postType'
-import { Error } from 'mongoose'
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const genreTypes: PostGenreType[] = [
   'Book',
@@ -46,6 +45,11 @@ const postSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  slug: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -72,6 +76,14 @@ const postSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
+  },
+})
+
+postSchema.set('toJSON', {
+  transform: (document: mongoose.Document, returnedObject: any) => {
+    delete returnedObject.__v
+    delete returnedObject.createdAt
+    delete returnedObject.updatedAt
   },
 })
 

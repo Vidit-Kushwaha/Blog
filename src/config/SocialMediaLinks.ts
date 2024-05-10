@@ -26,7 +26,7 @@ export const socialMediaLinks = [
   },
   {
     name: 'Instagram',
-    url: 'https://www.instagram.com/viditkushwaha/',
+    url: 'https://www.instagram.com/vidit_kushwaha_/',
     handle: 'vidit_kushwaha_',
     icon: IoLogoInstagram,
   },

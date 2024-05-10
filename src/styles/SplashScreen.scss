@@ -1,0 +1,79 @@
+#logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation:
+    fill 1s ease forwards 1.5s,
+    exit-anim 1s ease-in-out forwards 3s;
+}
+
+#logo path:nth-child(1) {
+  stroke-dasharray: 718.5270385742188px;
+  stroke-dashoffset: 718.5270385742188px;
+  animation: line-anim 2s ease forwards;
+}
+
+#logo path:nth-child(2) {
+  stroke-dasharray: 577.5167846679688px;
+  stroke-dashoffset: 577.5167846679688px;
+  animation: line-anim 2s ease forwards 0.2s;
+}
+
+#logo path:nth-child(3) {
+  stroke-dasharray: 405.95379638671875px;
+  stroke-dashoffset: 405.95379638671875px;
+  animation: line-anim 2s ease forwards 0.4s;
+}
+
+#logo path:nth-child(4) {
+  stroke-dasharray: 686.1864624023438px;
+  stroke-dashoffset: 686.1864624023438px;
+  animation: line-anim 2s ease forwards 0.6s;
+}
+
+#logo path:nth-child(5) {
+  stroke-dasharray: 1609.052490234375px;
+  stroke-dashoffset: 1609.052490234375px;
+  animation:
+    line-anim 2s ease forwards 0.8s,
+    circleFill 1s ease forwards 2s;
+}
+
+@keyframes line-anim {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes circleFill {
+  from {
+    fill: black;
+    stroke-width: 2;
+  }
+
+  to {
+    fill: #ec2e3a;
+    stroke-width: 0;
+  }
+}
+
+@keyframes fill {
+  from {
+    fill: transparent;
+  }
+
+  to {
+    fill: black;
+  }
+}
+
+@keyframes exit-anim {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}

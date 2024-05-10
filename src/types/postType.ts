@@ -6,7 +6,7 @@ export interface Post {
   readingTime: number
   user: string
   uid: string
-  genre: PostGenreType[]
+  genre: PostGenreType
   flags?: PostFlagType[]
   keywords?: string[]
   articleBody: string

@@ -13,16 +13,18 @@ export async function GET(req: NextRequest) {
 
   const searchParams = req.nextUrl.searchParams
 
-  const limit =  parseInt(searchParams?.get('n')?.toLowerCase() || '6')  
+  const limit = parseInt(searchParams?.get('n')?.toLowerCase() || '6')
 
   console.log(limit)
 
-  const posts: PostType[] = await Post.find().limit(limit).sort({ createdAt: -1 })
+  const posts: PostType[] = await Post.find()
+    .limit(limit)
+    .sort({ createdAt: -1 })
 
   if (!posts)
     return NextResponse.json({
       success: false,
-      message:  NextResponse.error.name,
+      message: NextResponse.error.name,
       data: {},
     })
 
