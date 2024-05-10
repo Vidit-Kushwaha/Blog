@@ -1,9 +1,9 @@
 import React from 'react'
 import Header from './(components)/Header'
 import ArticleBody from './(components)/ArticleBody'
-import Tag from './(components)/Tag'
 import { Metadata, ResolvingMetadata } from 'next'
 import { URL } from '@/config'
+import FeedBack from './(components)/FeedBack'
 
 type Props = {
   params: { id: string }
@@ -24,14 +24,17 @@ async function getData(id: string) {
 const page: React.FC<Props> = async ({ params: { id } }) => {
   const { data } = await getData(id)
   return (
-    <div className="container w-full max-w-screen-md space-y-5 ">
-      <Header
-        badge={{ name: data.genre, color: 'blue', href: `/blog/${data.id}` }}
-        {...data}
-      />
-      <ArticleBody {...data} />
-      <Tag keywords={data.keywords} />
-    </div>
+    <>
+      <div className="container w-full max-w-screen-md space-y-8">
+        <Header
+          badge={{ name: data.genre, color: 'blue', href: `/blog/${id}` }}
+          {...data}
+        />
+        <ArticleBody {...data} />
+        <hr className="mb-10 mt-20 border-black" />
+        <FeedBack id={id} />
+      </div>
+    </>
   )
 }
 

@@ -1,4 +1,3 @@
-import RelevantPostCard from '@/components/RelevantPostCard'
 import { URL } from '@/config'
 import React from 'react'
 
@@ -21,23 +20,19 @@ interface RelevantPostProps {
 }
 
 const RelevantPost: React.FC<RelevantPostProps> = async ({
-  className = 'border-t-[1px] border-neutral-200 dark:border-neutral-700',
+  className = 'border-y-[1px] border-neutral-200',
   parameters,
 }) => {
-  const { data } = await getData(parameters)
+  // const { data } = await getData(parameters)
 
   return (
-    <div
-      className={`${className} relative mt-16 bg-neutral-100 py-16 dark:bg-neutral-800 lg:mt-24 lg:py-28`}
-    >
-      <div className="container max-h-[340px]">
-        <h2 className="text-3xl font-semibold">Related posts</h2>
-        <div className="mt-10 grid h-full gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
-          <RelevantPostCard headline="djfjdkj" date="hello" id="1" href="/" />
-          {/* {relevantArticle &&
-              relevantArticle.map((post, i) => (
-              ))} */}
-          {/*  */}
+    <div className={`${className} relative mt-16 py-16 lg:mt-24`}>
+      <div className="container">
+        <h2 className="text-lg font-semibold">Related Posts</h2>
+        <div className="mt-5 grid h-full gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-3">
+          {/* {[1, 2, 3, 4, 5].slice(0, 3).map((item, index) => (
+            <ArticleCard key={index} {...tempFeature} />
+          ))} */}
         </div>
       </div>
     </div>
