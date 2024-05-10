@@ -1,72 +1,140 @@
 'use client'
-
-import React, { useState } from 'react'
-import { open, close } from '@/assets'
-import { NavLinks } from '@/config/SocialMediaLinks'
+import { logo } from '@/assets'
 import Image from 'next/image'
 import Link from 'next/link'
-import DarkModeToggle from '../DarkModeToggle'
+import { usePathname } from 'next/navigation'
+import React, { Suspense, useEffect, useState } from 'react'
+import SearchSmall from '../SearchSmall'
+import { IoIosSearch } from 'react-icons/io'
+import { IoReorderThree } from 'react-icons/io5'
 
-const Navbar = () => {
-  const [toggle, setToggle] = useState(false)
+const NavLinks = [
+  {
+    name: 'Discover',
+    url: '/discover',
+  },
+  {
+    name: 'Contact',
+    url: '/contact',
+  },
+  {
+    name: 'About',
+    url: '/about',
+  },
+]
 
+const SearchBarFallback = () => {
   return (
-    <nav className="navbar fixed left-0 right-0 top-0 z-50 flex w-full items-center justify-between border-b-[1px] border-neutral-400 bg-white px-3 py-6 dark:bg-dark-200 dark:text-white ">
-      <div
-        className="container mx-auto flex w-full flex-row flex-wrap items-center
-        "
-      >
-        <Link
-          href="/"
-          className="title-font flex items-center font-bold text-gray-900 dark:text-gray-300 md:mb-0"
-        >
-          <span className="ml-3 text-xl">Blogs</span>
-        </Link>
-        <div className="hidden flex-wrap items-center justify-center text-base md:ml-4 md:mr-auto md:flex md:border-l md:border-gray-400 md:py-1 md:pl-4 ">
-          {NavLinks.map((link, index) => {
-            return (
-              <Link
-                key={index}
-                href={link.url}
-                className={`font-poppins mr-5 text-neutral-900 hover:text-gray-900 dark:text-gray-300`}
-              >
-                {link.name}
-              </Link>
-            )
-          })}
-        </div>
-        <DarkModeToggle className="ml-auto hidden md:ml-0 md:block lg:mr-5" />
-
-        <div className="flex flex-1 items-center justify-end duration-200 md:hidden">
-          <Image
-            src={toggle ? close : open}
-            alt="menu"
-            className="h-[28px] w-[28px] cursor-pointer fill-neutral-700 object-contain text-black "
-            onClick={() => setToggle(!toggle)}
-          />
-          <div
-            className={`${
-              !toggle ? 'hidden' : 'flex'
-            } absolute right-0 top-20 -z-0 mx-4 my-2 min-w-[140px] rounded-xl border-[1px] bg-neutral-50 p-6 transition-transform duration-100 dark:text-gray-300`}
-          >
-            <ul className="flex flex-1 list-none flex-col items-start justify-end">
-              {NavLinks.map((nav, index) => (
-                <li
-                  key={index}
-                  className={`font-poppins mb-4 cursor-pointer text-[16px] font-normal dark:text-gray-300 `}
-                >
-                  <Link href={`${nav.url}`}>{nav.name}</Link>
-                </li>
-              ))}
-              <li className="font-poppins text-dimWhite cursor-pointer text-[16px] font-normal">
-                <DarkModeToggle />
-              </li>
-            </ul>
+    <div className="border-b-[1px] border-black py-2">
+      <div className="flex cursor-text touch-manipulation overflow-hidden">
+        <div className="flex flex-grow flex-row-reverse items-center overflow-hidden">
+          <div className="mx-2 flex">
+            <IoIosSearch className="h-6 w-6 fill-gray-500" />
+          </div>
+          <div className="flex items-center">
+            <div className="flex w-full flex-col items-start justify-start overflow-hidden">
+              <input
+                className="w-full text-ellipsis border-none bg-transparent text-black decoration-transparent focus:border-transparent focus:outline-none focus:ring-0"
+                type="search"
+                placeholder="Search..."
+                aria-required="false"
+                maxLength={100}
+                autoComplete="off"
+                aria-label="Search..."
+              />
+            </div>
           </div>
         </div>
       </div>
-    </nav>
+    </div>
   )
 }
 
-export default Navbar
+const NavBar = () => {
+  const router = usePathname()
+  const [active, setActive] = useState(router.replace('/', ''))
+  const [toggle, setToggle] = useState(false)
+
+  useEffect(() => {
+    setActive(router.replace('/', ''))
+  }, [router])
+
+  return (
+    <>
+      <header className="relative mb-8 border-b border-gray-300 px-1 pb-4 pt-4 shadow-md  sm:px-6">
+        <div className="mx-auto flex w-full max-w-screen-xl flex-row items-center justify-between">
+          <Link
+            href="/"
+            className="relative mr-4 flex items-center"
+            aria-label="blog logo"
+          >
+            <Image
+              src={logo}
+              alt="logo"
+              className="h-[70px] w-[75px] mix-blend-normal"
+            />
+          </Link>
+          <nav className="relative hidden items-center bg-white md:flex">
+            <div className="r-0 relative hidden space-x-8 font-light md:block">
+              {NavLinks.map((link, index) => (
+                <Link
+                  key={index}
+                  className={`capitalize !text-black hover:underline hover:underline-offset-8 ${
+                    active.toLowerCase() == link.name.toLowerCase()
+                      ? 'font-semibold underline underline-offset-8'
+                      : ''
+                  }`}
+                  href={link.url}
+                  onClick={() => setActive(link.name)}
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+            <div className="ml-8 flex items-center">
+              <Suspense fallback={<SearchBarFallback />}>
+                <SearchSmall />
+              </Suspense>
+            </div>
+          </nav>
+          <button
+            className="absolute right-0 md:hidden"
+            type="button"
+            onClick={() => setToggle(!toggle)}
+          >
+            <IoReorderThree className="h-[60px] w-auto" />
+          </button>
+        </div>
+      </header>
+      <div
+        className={`${
+          !toggle && 'hidden'
+        } absolute z-40 w-[100vw] justify-center overscroll-none bg-white py-10`}
+      >
+        <div className="r-0 relative flex flex-col space-y-8 text-lg font-light">
+          {NavLinks.map((link, index) => (
+            <Link
+              key={index}
+              className={`mx-auto text-xl capitalize !text-black hover:underline hover:underline-offset-8 ${
+                active == link.name.toLowerCase()
+                  ? 'font-semibold underline underline-offset-8'
+                  : ''
+              }`}
+              href={link.url}
+              onClick={() => setActive(link.name)}
+            >
+              {link.name}
+            </Link>
+          ))}
+        </div>
+        <div className="mx-auto my-8 max-w-[200px]">
+          <Suspense fallback={<SearchBarFallback />}>
+            <SearchSmall />
+          </Suspense>
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default NavBar

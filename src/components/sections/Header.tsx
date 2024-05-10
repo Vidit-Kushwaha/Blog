@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import Navbar from '@/components/sections/NavBar'
 import { Slide, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -26,7 +25,6 @@ const Header: FC<Props> = ({ className = '' }) => {
           limit={1}
         />
       </div>
-      <Navbar />
     </div>
   )
 }
