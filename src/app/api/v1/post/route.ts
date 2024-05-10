@@ -11,12 +11,18 @@ import { unsealData } from 'iron-session'
 export async function GET(req: NextRequest) {
   await connectDB()
 
-  const posts: PostType = await Post.find()
+  const searchParams = req.nextUrl.searchParams
+
+  const limit =  parseInt(searchParams?.get('n')?.toLowerCase() || '6')  
+
+  console.log(limit)
+
+  const posts: PostType[] = await Post.find().limit(limit).sort({ createdAt: -1 })
 
   if (!posts)
     return NextResponse.json({
       success: false,
-      message: 'Hello World',
+      message:  NextResponse.error.name,
       data: {},
     })
 
