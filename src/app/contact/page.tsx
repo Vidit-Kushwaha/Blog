@@ -1,5 +1,5 @@
 import React from 'react'
-import Form from './Form'
+import ContactForm from './ContactForm'
 
 const page = () => {
   return (
@@ -11,7 +11,7 @@ const page = () => {
       <div className="text-lg">
         We&apos;d love to hear from you! Send us a message using the form below.
       </div>
-      <Form />
+      <ContactForm />
     </main>
   )
 }

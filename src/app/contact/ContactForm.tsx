@@ -8,7 +8,7 @@ const intialState = {
   message: '',
 }
 
-const Form = () => {
+const ContactForm = () => {
   const [form, setForm] = useState(intialState)
 
   const handelChange = (
@@ -50,7 +50,7 @@ const Form = () => {
           Name
         </label>
         <input
-          className="focus:shadow-outline w-full appearance-none rounded-lg border-[2px] border-black px-5 py-3 leading-tight focus:outline-none"
+          className="focus:shadow-outline w-full appearance-none rounded border border-black px-5 py-3 leading-tight focus:outline-none"
           id="name"
           name="name"
           type="text"
@@ -64,7 +64,7 @@ const Form = () => {
           Email
         </label>
         <input
-          className="focus:shadow-outline w-full appearance-none rounded-lg border-[2px] border-black px-5 py-3 leading-tight focus:outline-none"
+          className="focus:shadow-outline w-full appearance-none rounded border border-black px-5 py-3 leading-tight focus:outline-none"
           id="email"
           type="email"
           name="email"
@@ -78,7 +78,7 @@ const Form = () => {
           Message
         </label>
         <textarea
-          className="focus:shadow-outline w-full appearance-none rounded-lg border-[2px] border-black px-5 py-3 leading-tight focus:outline-none"
+          className="focus:shadow-outline w-full appearance-none rounded border border-black px-5 py-3 leading-tight focus:outline-none"
           id="message"
           rows={5}
           name="message"
@@ -87,14 +87,11 @@ const Form = () => {
           required
         />
       </div>
-      <button
-        className="rounded-lg bg-black px-5 py-3 text-white"
-        type="submit"
-      >
+      <button className="rounded bg-black px-5 py-3 text-white" type="submit">
         Send
       </button>
     </form>
   )
 }
 
-export default Form
+export default ContactForm
