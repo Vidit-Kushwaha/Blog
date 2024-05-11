@@ -11,7 +11,7 @@ export async function GET(req: NextRequest, context: any) {
 
   const post: PostType | null = (await Post.findById(id).populate(
     'user',
-    'avatar'
+    'name avatar'
   )) as PostType | null
 
   if (!post) {

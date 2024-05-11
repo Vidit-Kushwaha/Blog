@@ -15,8 +15,6 @@ export async function GET(req: NextRequest) {
 
   const limit = parseInt(searchParams?.get('n')?.toLowerCase() || '6')
 
-  console.log(limit)
-
   const posts: PostType[] = await Post.find()
     .limit(limit)
     .sort({ createdAt: -1 })

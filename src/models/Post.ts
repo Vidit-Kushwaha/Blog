@@ -82,7 +82,6 @@ const postSchema = new mongoose.Schema({
 postSchema.set('toJSON', {
   transform: (document: mongoose.Document, returnedObject: any) => {
     delete returnedObject.__v
-    delete returnedObject.createdAt
     delete returnedObject.updatedAt
   },
 })

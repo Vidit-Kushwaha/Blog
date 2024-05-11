@@ -47,7 +47,10 @@ const ShareButton: React.FC<ShareButtonProps> = ({ className, urlHeader }) => {
   ]
   return (
     <Popover className={`relative ${className}`}>
-      <Popover.Button className="rounded-3xl border-[1px] px-2 py-1 focus:border-transparent focus:ring-0 sm:border-0">
+      <Popover.Button
+        className="rounded-3xl border-0 px-2 py-1 focus:border-transparent focus:ring-0"
+        aria-label="Share-Button"
+      >
         <div className="flex space-x-1">
           <IoEllipsisHorizontal className="h-7 w-7" />
           <div className="block sm:hidden ">more</div>

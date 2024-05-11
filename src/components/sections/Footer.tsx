@@ -18,9 +18,11 @@ const Footer = () => {
               alt="logo"
               className="h-[60px] w-[75px] mix-blend-normal"
             />
-            {/* <span className="ml-3 text-xl">Blogs</span> */}
           </Link>
-          <p className="mt-4 text-sm text-black sm:ml-4 sm:mt-0 sm:border-l-2 sm:border-gray-400 sm:py-2 sm:pl-4">
+          <p
+            className="mt-4 text-sm text-black sm:ml-4 sm:mt-0 sm:border-l-2 sm:border-gray-400 sm:py-2 sm:pl-4"
+            aria-disabled
+          >
             © 2024 Vidit Kushwaha —
             <Link
               href={
@@ -46,8 +48,10 @@ const Footer = () => {
                   } duration-150 hover:text-black`}
                   rel="noopener noreferrer"
                   target="_blank"
+                  title={link.name}
                 >
                   <link.icon className="h-5 w-5" />
+                  <span className="sr-only">{link.name}</span>
                 </Link>
               )
             })}

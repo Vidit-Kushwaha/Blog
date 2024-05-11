@@ -3,7 +3,7 @@ import { logo } from '@/assets'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { Suspense, useEffect, useState } from 'react'
+import React, { Suspense, use, useEffect, useRef, useState } from 'react'
 import SearchSmall from '../SearchSmall'
 import { IoIosSearch } from 'react-icons/io'
 import { IoReorderThree } from 'react-icons/io5'
@@ -54,6 +54,22 @@ const NavBar = () => {
   const router = usePathname()
   const [active, setActive] = useState(router.replace('/', ''))
   const [toggle, setToggle] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setToggle((toggle) => false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClick)
+    return () => {
+      document.removeEventListener('mousedown', handleClick)
+    }
+
+    // eslint-disable-next-line
+  }, [])
 
   useEffect(() => {
     setActive(router.replace('/', ''))
@@ -61,7 +77,12 @@ const NavBar = () => {
 
   return (
     <>
-      <header className="relative mb-8 border-b border-gray-300 px-1 pb-4 pt-4 shadow-md  sm:px-6">
+      <header
+        className={`relative mb-8 border-b border-gray-300 px-1 pb-4 pt-4 shadow-md sm:px-6 ${
+          toggle && 'mb-2'
+        }`}
+        ref={ref}
+      >
         <div className="mx-auto flex w-full max-w-screen-xl flex-row items-center justify-between">
           <Link
             href="/"
@@ -100,7 +121,10 @@ const NavBar = () => {
           <button
             className="absolute right-0 md:hidden"
             type="button"
-            onClick={() => setToggle(!toggle)}
+            aria-label="Sidebar Toggle"
+            onClick={() => {
+              setToggle((toggle) => !toggle)
+            }}
           >
             <IoReorderThree className="h-[60px] w-auto" />
           </button>
@@ -109,7 +133,7 @@ const NavBar = () => {
       <div
         className={`${
           !toggle && 'hidden'
-        } absolute z-40 w-[100vw] justify-center overscroll-none bg-white py-10`}
+        } absolute z-40 w-[100vw] transform justify-center overscroll-none bg-white py-10 shadow-md`}
       >
         <div className="r-0 relative flex flex-col space-y-8 text-lg font-light">
           {NavLinks.map((link, index) => (
