@@ -17,9 +17,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "framer-motion": "^10.18.0",
     "fuse.js": "^7.0.0",
-    "gsap": "^3.12.5",
     "iron-session": "^8.0.1",
     "matter-js": "^0.19.0",
     "mongoose": "^8.0.4",
