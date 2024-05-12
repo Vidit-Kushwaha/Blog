@@ -76,12 +76,9 @@ const NavBar = () => {
   }, [router])
 
   return (
-    <>
+    <div ref={ref} className="bg-white">
       <header
-        className={`relative mb-8 border-b border-gray-300 px-1 pb-4 pt-4 shadow-md sm:px-6 ${
-          toggle && 'mb-2'
-        }`}
-        ref={ref}
+        className={`relative mb-8 border-b border-gray-300 px-1 pb-4 pt-4 shadow-md sm:px-6 `}
       >
         <div className="mx-auto flex w-full max-w-screen-xl flex-row items-center justify-between">
           <Link
@@ -133,7 +130,7 @@ const NavBar = () => {
       <div
         className={`${
           !toggle && 'hidden'
-        } absolute z-40 w-[100vw] transform justify-center overscroll-none bg-white py-10 shadow-md`}
+        } absolute z-40 w-[100vw] transform justify-center overscroll-none bg-white py-10 shadow-md md:hidden`}
       >
         <div className="r-0 relative flex flex-col space-y-8 text-lg font-light">
           {NavLinks.map((link, index) => (
@@ -157,7 +154,7 @@ const NavBar = () => {
           </Suspense>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
