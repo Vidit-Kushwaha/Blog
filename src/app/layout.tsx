@@ -6,6 +6,7 @@ import Header from '@/components/sections/Header'
 import Footer from '@/components/sections/Footer'
 import { URL as urlString } from '@/config'
 import NavBar from '@/components/sections/NavBar'
+import GoogleAnalytics from '@/components/GoogleAnalytics'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -38,6 +39,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <GoogleAnalytics />
       <body className={`${poppins.className}`}>
         <NavBar />
         <Header className="container max-w-screen-lg shadow-sm" />
