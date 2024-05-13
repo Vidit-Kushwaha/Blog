@@ -1,4 +1,5 @@
 'use client'
+import { URL } from '@/config'
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 
@@ -23,12 +24,11 @@ const ContactForm = () => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
-      await fetch('https://viditkushwaha.live/api/contact', {
+      await fetch(`${URL}/api/v1/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
-          mode: 'no-cors',
         },
         body: JSON.stringify(form),
       }).then((res) => {
