@@ -14,7 +14,7 @@ interface FeatureArticleProps {
 
 const getData = async (endpoint: string) => {
   const res = await fetch(`${`${URL}/api/v1`}${endpoint}`, {
-    next: { revalidate: 3600 },
+    cache: 'no-cache',
   })
   if (!res.ok) {
     throw new Error('Failed to fetch data')

@@ -3,7 +3,7 @@ import { logo } from '@/assets'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { Suspense, use, useEffect, useRef, useState } from 'react'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import SearchSmall from '../SearchSmall'
 import { IoIosSearch } from 'react-icons/io'
 import { IoReorderThree } from 'react-icons/io5'
@@ -76,85 +76,90 @@ const NavBar = () => {
   }, [router])
 
   return (
-    <div ref={ref} className="bg-white">
-      <header
-        className={`relative mb-8 border-b border-gray-300 px-1 pb-4 pt-4 shadow-md sm:px-6 `}
-      >
-        <div className="mx-auto flex w-full max-w-screen-xl flex-row items-center justify-between">
-          <Link
-            href="/"
-            className="relative mr-4 flex items-center"
-            aria-label="blog logo"
-          >
-            <Image
-              src={logo}
-              alt="logo"
-              className="h-[70px] w-[75px] mix-blend-normal"
-            />
-          </Link>
-          <nav className="relative hidden items-center bg-white md:flex">
-            <div className="r-0 relative hidden space-x-8 font-light md:block">
-              {NavLinks.map((link, index) => (
-                <Link
-                  key={index}
-                  className={`capitalize !text-black hover:underline hover:underline-offset-8 ${
-                    active.toLowerCase() == link.name.toLowerCase()
-                      ? 'font-semibold underline underline-offset-8'
-                      : ''
-                  }`}
-                  href={link.url}
-                  onClick={() => setActive(link.name)}
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </div>
-            <div className="ml-8 flex items-center">
-              <Suspense fallback={<SearchBarFallback />}>
-                <SearchSmall />
-              </Suspense>
-            </div>
-          </nav>
-          <button
-            className="absolute right-0 md:hidden"
-            type="button"
-            aria-label="Sidebar Toggle"
-            onClick={() => {
-              setToggle((toggle) => !toggle)
-            }}
-          >
-            <IoReorderThree className="h-[60px] w-auto" />
-          </button>
-        </div>
-      </header>
-      <div
-        className={`${
-          !toggle && 'hidden'
-        } absolute z-40 w-[100vw] transform justify-center overscroll-none bg-white py-10 shadow-md md:hidden`}
-      >
-        <div className="r-0 relative flex flex-col space-y-8 text-lg font-light">
-          {NavLinks.map((link, index) => (
+    <>
+      <div ref={ref} className="relative">
+        <header
+          className={`relative mb-8 border-b border-gray-300 bg-white px-1 pb-4 pt-4 shadow-md sm:px-6`}
+        >
+          <div className="mx-auto flex w-full max-w-screen-xl flex-row items-center justify-between">
             <Link
-              key={index}
-              className={`mx-auto text-xl capitalize !text-black hover:underline hover:underline-offset-8 ${
-                active == link.name.toLowerCase()
-                  ? 'font-semibold underline underline-offset-8'
-                  : ''
-              }`}
-              href={link.url}
-              onClick={() => setActive(link.name)}
+              href="/"
+              className="relative mr-4 flex items-center"
+              aria-label="blog logo"
             >
-              {link.name}
+              <Image
+                src={logo}
+                alt="logo"
+                className="h-[70px] w-[75px] mix-blend-normal"
+              />
             </Link>
-          ))}
-        </div>
-        <div className="mx-auto my-8 max-w-[200px]">
-          <Suspense fallback={<SearchBarFallback />}>
-            <SearchSmall />
-          </Suspense>
+            <nav className="relative hidden items-center bg-white md:flex">
+              <div className="r-0 relative hidden space-x-8 font-light md:block">
+                {NavLinks.map((link, index) => (
+                  <Link
+                    key={index}
+                    className={`capitalize !text-black hover:underline hover:underline-offset-8 ${
+                      active.toLowerCase() == link.name.toLowerCase()
+                        ? 'font-semibold underline underline-offset-8'
+                        : ''
+                    }`}
+                    href={link.url}
+                    onClick={() => setActive(link.name)}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+              <div className="ml-8 flex items-center">
+                <Suspense fallback={<SearchBarFallback />}>
+                  <SearchSmall />
+                </Suspense>
+              </div>
+            </nav>
+            <button
+              className="absolute right-0 md:hidden"
+              type="button"
+              aria-label="Sidebar Toggle"
+              onClick={() => {
+                setToggle((toggle) => !toggle)
+              }}
+            >
+              <IoReorderThree className="h-[60px] w-auto" />
+            </button>
+          </div>
+        </header>
+        <div
+          className={`${
+            !toggle && 'hidden'
+          } absolute z-40 w-[100vw] transform justify-center overscroll-none bg-white py-10 shadow-md md:hidden`}
+        >
+          <div className="r-0 relative flex flex-col space-y-8 text-lg font-light">
+            {NavLinks.map((link, index) => (
+              <Link
+                key={index}
+                className={`mx-auto text-xl capitalize !text-black hover:underline hover:underline-offset-8 ${
+                  active == link.name.toLowerCase()
+                    ? 'font-semibold underline underline-offset-8'
+                    : ''
+                }`}
+                href={link.url}
+                onClick={() => setActive(link.name)}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
+          <div className="mx-auto my-8 max-w-[200px]">
+            <Suspense fallback={<SearchBarFallback />}>
+              <SearchSmall />
+            </Suspense>
+          </div>
         </div>
       </div>
-    </div>
+      {toggle && (
+        <div className="fixed left-0 h-[100vh] w-full bg-black opacity-[0.01]"></div>
+      )}
+    </>
   )
 }
 
