@@ -11,6 +11,7 @@ const nextConfig = {
   experimental: {
     esmExternals: 'loose',
     serverComponentsExternalPackages: ['mongoose'],
+    enableUndici: true
   },
   webpack: (config) => {
     config.experiments = {

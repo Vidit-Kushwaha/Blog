@@ -5,7 +5,7 @@ import React from 'react'
 
 async function getData(id: string) {
   const res = await fetch(`${URL}/api/v1/post/${id}`, {
-    next: { revalidate: 3600 },
+    cache: 'no-cache',        
   })
 
   if (!res.ok) {
