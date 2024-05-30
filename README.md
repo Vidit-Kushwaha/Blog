@@ -1,7 +1,9 @@
 
 
 # Blog
-**Built with Next.js, iron-session, MongoDB, and mongoose.** Write, share, and connect.
+**Built with Next.js, iron-session, MongoDB, and mongoose.** Write, share, and connect using markdown.
+
+![blog page](https://i.ibb.co/Hz7Z4gz/blog-viditkushwaha-com-2.png)
 
 ## Table of Contents
 
@@ -34,21 +36,39 @@ To run this portfolio website locally, follow these steps:
 
 1. Clone the repository:
 
-	`git clone https://github.com/Vidit-Kushwaha/Blog.git`
+	```bash
+	git clone https://github.com/Vidit-Kushwaha/Blog.git
+ 	```
 
-2. Install the dependencies:
+3. Install the dependencies:
 
-	```npm install```
+	```bash
+	npm install
+ 	```
  
-3. Set environment variables:
+4. Set environment variables:
 
-	Configure `.env.local` with MongoDB connection details and secret keys
+	Create a .env file in the backend directory and add the following environment variables:
+	```bash
+	PORT  = '3000'
+	MONGODB_URI = 'mongodb://localhost:27017'
+	URL = 'http://localhost:3000'
+	JWT_SECRET = 'secret'
+	SESSION_PASS = 'randomStringInput'
+	NODE_ENV = 'production'
+	EMAIL = 'example@example.com'
+	EMAIL_PASS = 'password'
+	NEXT_PUBLIC_MEASUREMENT_ID = 'G-Tag'
+	```
 
-4. Start the development server:
 
-	```npm run dev```
+6. Start the development server:
 
-5. Open your web browser and visit [http://localhost:3000](http://localhost:3000) to view the website.
+	```bash
+	npm run dev
+	```
+
+7. Open your web browser and visit [http://localhost:3000](http://localhost:3000) to view the website.
 
 ## Contributing
 
