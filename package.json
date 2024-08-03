@@ -2,7 +2,8 @@
   "name": "blogs",
   "version": "0.1.0",
   "description": "Next.js Blog | Secure & Serverless with MongoDB & iron-session",
-  "license": "ISC",
+  "author": "Vidit Kushwaha <connect.viditkushwaha@gmail.com> (https://viditkushwaha.com/)",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development next dev",
@@ -35,7 +36,7 @@
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.0",
     "sass": "^1.69.7",
-    "sharp": "^0.33.4",
+    "sharp": "^0.33.1",
     "swr": "^2.2.4"
   },
   "devDependencies": {
