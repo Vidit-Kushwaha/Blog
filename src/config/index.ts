@@ -1,6 +1,6 @@
 const NODE_ENV = process.env.NODE_ENV || 'development'
 const port = process.env.PORT || 3000
-const URL = process.env.URL || `http://localhost:${port}`
+const URL = NODE_ENV == 'development' ? `http://localhost:${port}` : 'https://blog.viditkushwaha.com'
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/Blog'
 const SESSION_PASS = process.env.SESSION_PASS || 'secret2'
 const EMAIL = process.env.EMAIL || ''
