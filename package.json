@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
     "fuse.js": "^7.0.0",
     "iron-session": "^8.0.1",
     "matter-js": "^0.19.0",
