@@ -1,5 +1,6 @@
 import SplashScreens from '@/components/SplashScreen'
 import RenderCTA from '@/components/RenderCTA'
+import ArticleSection from '@/components/cards/ArticleSection'
 
 export const runtime = 'edge'
 const page = () => {
@@ -27,6 +28,11 @@ const page = () => {
           </div>
         </div>
       </div>
+      <ArticleSection
+        title="Top Articles"
+        noOfCard={6}
+        ApiEndpoint="/post/like"
+      />
     </div>
   )
 }
